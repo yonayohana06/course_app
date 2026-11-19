@@ -262,3 +262,33 @@ Tidak ada satu baris pun kode di layer Presentation (UI, StateNotifier, Screens)
 ### Keterbatasan (*Known Limitations*):
 * Fitur download video offline belum diimplementasikan dengan penyimpanan disk lokal terenkripsi (saat ini pemutaran dilakukan via direct video streaming / network caching).
 * Belum ada fitur pencatatan progres menit terakhir menonton yang disimpan ke persistent local database (misal: Hive / SQLite).
+
+
+---
+
+## 8. Design System & Design Tokens (`lib/core/design_system/`)
+
+Untuk menjamin konsistensi antarmuka pengguna (UI), kecepatan *reusability*, dan kemudahan *theming* di masa mendatang, aplikasi telah mengimplementasikan arsitektur **Design System** mandiri.
+
+```
+lib/core/design_system/
+├── design_system.dart          # Single barrel export untuk seluruh token & komponen
+├── tokens/
+│   ├── app_colors.dart         # Semantic color palette & surface tones
+│   ├── app_typography.dart     # Standardized text styles & scale (headings, body, captions)
+│   ├── app_spacing.dart        # 4-point spacing scale, spacers, dan padding presets
+│   ├── app_radius.dart         # Border radius constants & shapes
+│   └── app_shadows.dart        # Depth elevation & drop shadows
+└── components/
+    ├── app_button.dart         # Multi-variant button (Primary, Secondary, Outline, Text) + Loading
+    ├── app_search_field.dart   # Search text input with icon prefix, clear button & callbacks
+    ├── app_badge.dart          # Contextual badge/chip (Category, Difficulty Level, Rating, Info)
+    ├── app_empty_state.dart    # Centered state view with icon, title, description & action
+    ├── app_error_state.dart    # Error state view with retry button
+    └── app_loading_indicator.dart # Standard circular progress indicator with optional message
+```
+
+### 8.1 Keuntungan Design Tokens & Components
+1. **Single Source of Truth:** Semua padding, margin, radius sudut, warna teks/permukaan didefinisikan secara tersentralisasi pada token. Perubahan estetika aplikasi dapat dilakukan pada level token tanpa menyentuh ratusan baris kode widget.
+2. **Material UI Decoupled Compatibility:** Menggunakan `package:material_ui/material_ui.dart` yang kompatibel penuh dengan Flutter 3.50+.
+3. **High Accessibility & Reusability:** Komponen seperti `AppButton` dan `AppBadge` menangani status loading, disabilitas, dan kontras warna secara otomatis.

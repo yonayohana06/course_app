@@ -25,7 +25,11 @@ Aplikasi menerapkan **Feature-First Clean Architecture** dengan memisahkan kode 
 ```text
 lib/
 ├── core/
-│   ├── theme/                  # Desain Material 3, Token Warna (AppColors), Tipografi
+│   ├── design_system/          # Dedicated Design System
+│   │   ├── design_system.dart  # Single barrel export
+│   │   ├── tokens/             # Design Tokens (Colors, Radius, Shadows, Spacing, Typography)
+│   │   └── components/         # Reusable Widgets (Button, SearchField, Badge, States)
+│   ├── theme/                  # Desain Material 3 & Global Theme
 │   └── utils/                  # Formatters & helper utilities
 ├── features/
 │   ├── course/                 # Fitur Katalog & Detail Kursus
@@ -82,7 +86,7 @@ flutter run
 ```
 
 ### 3. Menjalankan Pengujian (Automated Tests)
-Seluruh pengujian unit model, repository, notifier, dan widget telah disiapkan dengan tingkat kelulusan 100%:
+Seluruh 36 pengujian unit model, repository, notifier, komponen design system, serta screen widget test telah disiapkan dengan tingkat kelulusan 100%:
 ```bash
 # Menjalankan seluruh test suite
 flutter test

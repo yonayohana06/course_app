@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/design_system/design_system.dart';
 import '../controllers/course_detail_controller.dart';
 import '../widgets/course_header.dart';
 import '../widgets/lesson_list_tile.dart';
@@ -34,8 +34,8 @@ class CourseDetailScreen extends ConsumerWidget {
         ),
       ),
       body: courseAsync.when(
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+        loading: () => const AppLoadingIndicator(
+          message: 'Memuat detail kursus...',
         ),
         error: (err, _) => ErrorStateView(
           message: err.toString().replaceAll('Exception: ', ''),
@@ -49,23 +49,22 @@ class CourseDetailScreen extends ConsumerWidget {
               ),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.base,
+                    AppSpacing.sm,
+                    AppSpacing.base,
+                    AppSpacing.md,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Daftar Materi (Lessons)',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimaryLight,
-                        ),
+                        style: AppTypography.heading3,
                       ),
                       Text(
                         '${course.lessons.length} materi',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
+                        style: AppTypography.labelMedium.copyWith(
                           color: AppColors.primary,
                         ),
                       ),
@@ -88,7 +87,7 @@ class CourseDetailScreen extends ConsumerWidget {
                 ),
               ),
               const SliverToBoxAdapter(
-                child: SizedBox(height: 32),
+                child: AppSpacing.verticalXxl,
               ),
             ],
           );

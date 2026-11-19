@@ -1,17 +1,38 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/design_system/design_system.dart';
 import '../controllers/course_list_controller.dart';
 import '../widgets/course_card.dart';
 import '../widgets/empty_state_view.dart';
 import '../widgets/error_state_view.dart';
 
-class CourseListScreen extends ConsumerWidget {
+class CourseListScreen extends ConsumerStatefulWidget {
   const CourseListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CourseListScreen> createState() => _CourseListScreenState();
+}
+
+class _CourseListScreenState extends ConsumerState<CourseListScreen> {
+  late final TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController(
+      text: ref.read(searchQueryProvider),
+    );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final coursesAsync = ref.watch(courseListControllerProvider);
     final filteredCoursesAsync = ref.watch(filteredCourseListProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
@@ -23,19 +44,11 @@ class CourseListScreen extends ConsumerWidget {
           children: [
             const Text(
               'E-Learning Platform',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-                color: AppColors.primary,
-              ),
+              style: AppTypography.heading2,
             ),
             Text(
               'Tingkatkan skill engineering Anda',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                color: AppColors.textSecondaryLight.withValues(alpha: 0.9),
-              ),
+              style: AppTypography.labelSmall,
             ),
           ],
         ),
@@ -50,8 +63,8 @@ class CourseListScreen extends ConsumerWidget {
         ],
       ),
       body: coursesAsync.when(
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+        loading: () => const AppLoadingIndicator(
+          message: 'Memuat daftar kursus...',
         ),
         error: (err, stack) => ErrorStateView(
           message: err.toString().replaceAll('Exception: ', ''),
@@ -75,63 +88,57 @@ class CourseListScreen extends ConsumerWidget {
 
           return Column(
             children: [
-              // Search bar
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Cari kursus atau instruktur...',
-                    prefixIcon: const Icon(Icons.search, size: 20),
-                    suffixIcon: ref.watch(searchQueryProvider).isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear, size: 18),
-                            onPressed: () {
-                              ref.read(searchQueryProvider.notifier).setQuery('');
-                            },
-                          )
-                        : null,
-                  ),
-                  onChanged: (val) {
-                    ref.read(searchQueryProvider.notifier).setQuery(val);
-                  },
+              // Search bar with Design System Component
+              AppSearchField(
+                controller: _searchController,
+                hintText: 'Cari kursus atau instruktur...',
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.base,
+                  AppSpacing.sm,
+                  AppSpacing.base,
+                  AppSpacing.sm,
                 ),
+                onChanged: (val) {
+                  ref.read(searchQueryProvider.notifier).setQuery(val);
+                },
+                onClear: () {
+                  ref.read(searchQueryProvider.notifier).setQuery('');
+                },
               ),
 
-              // Category chips
+              // Category chips with AppBadge
               SizedBox(
-                height: 44,
+                height: 38,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.base,
+                  ),
                   itemCount: categories.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 8),
+                  separatorBuilder: (context, index) =>
+                      AppSpacing.horizontalSm,
                   itemBuilder: (context, index) {
                     final cat = categories[index];
                     final isSelected = cat == selectedCategory;
-                    return ChoiceChip(
-                      label: Text(cat),
-                      selected: isSelected,
-                      selectedColor: AppColors.primary,
-                      labelStyle: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.textPrimaryLight,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.normal,
-                        fontSize: 13,
-                      ),
-                      onSelected: (_) {
-                        ref.read(selectedCategoryProvider.notifier).setCategory(cat);
+                    return AppBadge.category(
+                      label: cat,
+                      isSelected: isSelected,
+                      onTap: () {
+                        ref
+                            .read(selectedCategoryProvider.notifier)
+                            .setCategory(cat);
                       },
                     );
                   },
                 ),
               ),
 
-              const SizedBox(height: 8),
+              AppSpacing.verticalSm,
 
               // Filtered list or empty filter message
               Expanded(
                 child: filteredCoursesAsync.when(
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loading: () => const AppLoadingIndicator(),
                   error: (err, _) => ErrorStateView(
                     message: err.toString(),
                     onRetry: () => ref
@@ -146,8 +153,11 @@ class CourseListScreen extends ConsumerWidget {
                             'Coba ubah kata kunci pencarian atau kategori filter.',
                         icon: Icons.search_off_rounded,
                         onAction: () {
-                          ref.read(selectedCategoryProvider.notifier).setCategory('Semua');
+                          ref
+                              .read(selectedCategoryProvider.notifier)
+                              .setCategory('Semua');
                           ref.read(searchQueryProvider.notifier).setQuery('');
+                          _searchController.clear();
                         },
                         actionLabel: 'Reset Filter',
                       );
@@ -158,10 +168,15 @@ class CourseListScreen extends ConsumerWidget {
                           .read(courseListControllerProvider.notifier)
                           .refresh(),
                       child: ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                        padding: const EdgeInsets.fromLTRB(
+                          AppSpacing.base,
+                          AppSpacing.sm,
+                          AppSpacing.base,
+                          AppSpacing.xl,
+                        ),
                         itemCount: filteredList.length,
                         separatorBuilder: (context, index) =>
-                            const SizedBox(height: 16),
+                            AppSpacing.verticalBase,
                         itemBuilder: (context, index) {
                           final course = filteredList[index];
                           return CourseCard(

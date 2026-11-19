@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/design_system/design_system.dart';
 import '../../domain/entities/course.dart';
 
 class CourseCard extends StatelessWidget {
@@ -16,8 +16,14 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
+      shape: const RoundedRectangleBorder(
+        borderRadius: AppRadius.borderLg,
+        side: BorderSide(color: AppColors.borderLight),
+      ),
+      elevation: 0,
       child: InkWell(
         onTap: onTap,
+        borderRadius: AppRadius.borderLg,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,47 +42,31 @@ class CourseCard extends StatelessWidget {
                       : _buildPlaceholder(),
                 ),
                 Positioned(
-                  top: 12,
-                  left: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.9),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      course.category,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  top: AppSpacing.md,
+                  left: AppSpacing.md,
+                  child: AppBadge(
+                    label: course.category,
+                    backgroundColor: AppColors.primary.withValues(alpha: 0.9),
+                    textColor: Colors.white,
+                    borderRadius: AppRadius.borderFull,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.xxs,
                     ),
                   ),
                 ),
                 Positioned(
-                  top: 12,
-                  right: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.star_rounded, color: AppColors.warning, size: 14),
-                        const SizedBox(width: 4),
-                        Text(
-                          course.rating.toStringAsFixed(1),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+                  top: AppSpacing.md,
+                  right: AppSpacing.md,
+                  child: AppBadge(
+                    label: course.rating.toStringAsFixed(1),
+                    icon: Icons.star_rounded,
+                    backgroundColor: Colors.black.withValues(alpha: 0.7),
+                    textColor: AppColors.warning,
+                    borderRadius: AppRadius.borderFull,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm,
+                      vertical: AppSpacing.xxs,
                     ),
                   ),
                 ),
@@ -84,7 +74,7 @@ class CourseCard extends StatelessWidget {
             ),
             // Content
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: AppSpacing.paddingCard,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,27 +82,18 @@ class CourseCard extends StatelessWidget {
                     course.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimaryLight,
-                      height: 1.3,
-                    ),
+                    style: AppTypography.heading3,
                   ),
-                  const SizedBox(height: 6),
+                  AppSpacing.verticalXs,
                   Text(
                     course.tagline,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.textSecondaryLight,
-                      height: 1.3,
-                    ),
+                    style: AppTypography.bodySmall,
                   ),
-                  const SizedBox(height: 14),
+                  AppSpacing.verticalMd,
                   const Divider(height: 1, color: AppColors.borderLight),
-                  const SizedBox(height: 12),
+                  AppSpacing.verticalMd,
                   // Metadata row: Instructor, lessons, duration
                   Row(
                     children: [
@@ -123,45 +104,42 @@ class CourseCard extends StatelessWidget {
                           course.instructor.name.isNotEmpty
                               ? course.instructor.name[0]
                               : '?',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
+                          style: AppTypography.labelSmall.copyWith(
                             color: AppColors.primary,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      AppSpacing.horizontalSm,
                       Expanded(
                         child: Text(
                           course.instructor.name,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimaryLight,
-                          ),
+                          style: AppTypography.labelMedium,
                         ),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.play_circle_outline, size: 14, color: AppColors.textSecondaryLight),
-                          const SizedBox(width: 4),
+                          const Icon(
+                            Icons.play_circle_outline,
+                            size: 14,
+                            color: AppColors.textSecondaryLight,
+                          ),
+                          AppSpacing.horizontalXxs,
                           Text(
                             '${course.lessonsCount} materi',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: AppColors.textSecondaryLight,
-                            ),
+                            style: AppTypography.labelSmall,
                           ),
-                          const SizedBox(width: 10),
-                          const Icon(Icons.schedule, size: 14, color: AppColors.textSecondaryLight),
-                          const SizedBox(width: 4),
+                          AppSpacing.horizontalSm,
+                          const Icon(
+                            Icons.schedule,
+                            size: 14,
+                            color: AppColors.textSecondaryLight,
+                          ),
+                          AppSpacing.horizontalXxs,
                           Text(
                             course.totalDuration,
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: AppColors.textSecondaryLight,
-                            ),
+                            style: AppTypography.labelSmall,
                           ),
                         ],
                       ),

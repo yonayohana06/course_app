@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/design_system/design_system.dart';
 import '../../domain/entities/course.dart';
 
 class CourseHeader extends StatelessWidget {
@@ -45,69 +45,35 @@ class CourseHeader extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
+                bottom: AppSpacing.base,
+                left: AppSpacing.base,
+                right: AppSpacing.base,
                 child: Row(
                   children: [
-                    Container(
+                    AppBadge(
+                      label: course.category,
+                      backgroundColor: AppColors.primary,
+                      textColor: Colors.white,
+                      borderRadius: AppRadius.borderFull,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        course.category,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        horizontal: AppSpacing.md,
+                        vertical: AppSpacing.xxs,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Container(
+                    AppSpacing.horizontalSm,
+                    AppBadge(
+                      label: course.rating.toStringAsFixed(1),
+                      icon: Icons.star_rounded,
+                      backgroundColor: Colors.black.withValues(alpha: 0.6),
+                      textColor: AppColors.warning,
+                      borderRadius: AppRadius.borderFull,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.6),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.star_rounded,
-                              color: AppColors.warning, size: 14),
-                          const SizedBox(width: 4),
-                          Text(
-                            course.rating.toStringAsFixed(1),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
+                        horizontal: AppSpacing.sm,
+                        vertical: AppSpacing.xxs,
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        course.level,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    AppBadge.level(level: course.level),
                   ],
                 ),
               ),
@@ -117,36 +83,27 @@ class CourseHeader extends StatelessWidget {
 
         // Course Info Section
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: AppSpacing.paddingCard,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 course.title,
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimaryLight,
-                  height: 1.25,
-                ),
+                style: AppTypography.heading1.copyWith(fontSize: 22),
               ),
-              const SizedBox(height: 8),
+              AppSpacing.verticalSm,
               Text(
                 course.tagline,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textSecondaryLight,
-                  height: 1.4,
-                ),
+                style: AppTypography.bodyMedium,
               ),
-              const SizedBox(height: 16),
+              AppSpacing.verticalBase,
 
               // Instructor Info Card
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: AppRadius.borderMd,
                   border: Border.all(color: AppColors.borderLight),
                 ),
                 child: Row(
@@ -162,33 +119,26 @@ class CourseHeader extends StatelessWidget {
                               course.instructor.name.isNotEmpty
                                   ? course.instructor.name[0]
                                   : '?',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
+                              style: AppTypography.titleMedium.copyWith(
                                 color: AppColors.primary,
+                                fontWeight: FontWeight.bold,
                               ),
                             )
                           : null,
                     ),
-                    const SizedBox(width: 12),
+                    AppSpacing.horizontalMd,
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             course.instructor.name,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textPrimaryLight,
-                            ),
+                            style: AppTypography.titleSmall,
                           ),
-                          const SizedBox(height: 2),
+                          AppSpacing.verticalXxs,
                           Text(
                             course.instructor.role,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: AppColors.textSecondaryLight,
-                            ),
+                            style: AppTypography.labelSmall,
                           ),
                         ],
                       ),
@@ -197,23 +147,15 @@ class CourseHeader extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 16),
+              AppSpacing.verticalBase,
               const Text(
                 'Deskripsi Kursus',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimaryLight,
-                ),
+                style: AppTypography.heading3,
               ),
-              const SizedBox(height: 8),
+              AppSpacing.verticalSm,
               Text(
                 course.description,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textSecondaryLight,
-                  height: 1.5,
-                ),
+                style: AppTypography.bodyMedium.copyWith(height: 1.5),
               ),
             ],
           ),

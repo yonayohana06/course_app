@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/design_system/design_system.dart';
 import '../../../course/presentation/widgets/error_state_view.dart';
 import '../controllers/lesson_player_controller.dart';
 import '../widgets/lesson_playlist_sheet.dart';
@@ -86,7 +86,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         errorBuilder: (context, errorMessage) {
           return Center(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(AppSpacing.base),
               child: Text(
                 'Gagal memutar video: $errorMessage',
                 textAlign: TextAlign.center,
@@ -138,7 +138,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           lessonAsync.value?.currentLesson?.title ?? 'Pemutar Video',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 16),
+          style: AppTypography.heading3,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
@@ -172,7 +172,9 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         ],
       ),
       body: lessonAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const AppLoadingIndicator(
+          message: 'Memuat data materi...',
+        ),
         error: (err, _) => ErrorStateView(
           message: err.toString().replaceAll('Exception: ', ''),
           onRetry: () => ref.refresh(lessonDetailProvider(param)),
@@ -207,7 +209,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                     child: _videoError != null
                         ? Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(AppSpacing.base),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -216,7 +218,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                                     color: AppColors.error,
                                     size: 36,
                                   ),
-                                  const SizedBox(height: 8),
+                                  AppSpacing.verticalSm,
                                   Text(
                                     _videoError!,
                                     textAlign: TextAlign.center,
@@ -225,14 +227,12 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                                       fontSize: 12,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primaryLight,
-                                    ),
+                                  AppSpacing.verticalMd,
+                                  AppButton(
+                                    label: 'Coba Lagi',
+                                    icon: Icons.refresh_rounded,
                                     onPressed: () =>
                                         _initializePlayer(lesson.videoUrl),
-                                    child: const Text('Coba Lagi'),
                                   ),
                                 ],
                               ),
@@ -246,7 +246,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                                     CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
-                                    SizedBox(height: 12),
+                                    AppSpacing.verticalMd,
                                     Text(
                                       'Menyiapkan pemutar video...',
                                       style: TextStyle(
@@ -265,63 +265,51 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
 
                 // Lesson info and switcher controls
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: AppSpacing.paddingCard,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Order & Duration Row
                       Row(
                         children: [
-                          Container(
+                          AppBadge(
+                            label: 'Materi #${lesson.order}',
+                            backgroundColor:
+                                AppColors.primary.withValues(alpha: 0.1),
+                            textColor: AppColors.primary,
+                            borderRadius: AppRadius.borderSm,
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color:
-                                  AppColors.primary.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              'Materi #${lesson.order}',
-                              style: const TextStyle(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12,
-                              ),
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xxs,
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          const Icon(Icons.access_time_rounded,
-                              size: 14, color: AppColors.textSecondaryLight),
-                          const SizedBox(width: 4),
+                          AppSpacing.horizontalSm,
+                          const Icon(
+                            Icons.access_time_rounded,
+                            size: 14,
+                            color: AppColors.textSecondaryLight,
+                          ),
+                          AppSpacing.horizontalXxs,
                           Text(
                             lesson.duration,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: AppColors.textSecondaryLight,
-                            ),
+                            style: AppTypography.labelSmall,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      AppSpacing.verticalSm,
                       Text(
                         lesson.title,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimaryLight,
-                          height: 1.3,
-                        ),
+                        style: AppTypography.heading2.copyWith(fontSize: 18),
                       ),
-                      const SizedBox(height: 16),
+                      AppSpacing.verticalBase,
 
                       // Next / Previous navigation buttons
                       Row(
                         children: [
                           Expanded(
-                            child: OutlinedButton.icon(
-                              icon: const Icon(Icons.skip_previous_rounded,
-                                  size: 18),
-                              label: const Text('Sebelumnya'),
+                            child: AppButton.outline(
+                              icon: Icons.skip_previous_rounded,
+                              label: 'Sebelumnya',
                               onPressed: playerState.hasPreviousLesson
                                   ? () {
                                       _navigateToLesson(
@@ -330,12 +318,11 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                                   : null,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          AppSpacing.horizontalMd,
                           Expanded(
-                            child: ElevatedButton.icon(
-                              icon: const Icon(Icons.skip_next_rounded,
-                                  size: 18),
-                              label: const Text('Berikutnya'),
+                            child: AppButton(
+                              icon: Icons.skip_next_rounded,
+                              label: 'Berikutnya',
                               onPressed: playerState.hasNextLesson
                                   ? () {
                                       _navigateToLesson(
@@ -347,27 +334,19 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 20),
+                      AppSpacing.verticalLg,
                       const Divider(color: AppColors.borderLight),
-                      const SizedBox(height: 12),
+                      AppSpacing.verticalMd,
 
                       // Summary
                       const Text(
                         'Ringkasan Materi',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimaryLight,
-                        ),
+                        style: AppTypography.heading3,
                       ),
-                      const SizedBox(height: 8),
+                      AppSpacing.verticalSm,
                       Text(
                         lesson.summary,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: AppColors.textSecondaryLight,
-                          height: 1.5,
-                        ),
+                        style: AppTypography.bodyMedium.copyWith(height: 1.5),
                       ),
                     ],
                   ),
