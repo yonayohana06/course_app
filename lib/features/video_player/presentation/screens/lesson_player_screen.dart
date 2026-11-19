@@ -43,7 +43,11 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     if (oldWidget.lessonId != widget.lessonId ||
         oldWidget.courseId != widget.courseId) {
       _disposeControllers();
-      _loadDataAndInit();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _loadDataAndInit();
+        }
+      });
     }
   }
 

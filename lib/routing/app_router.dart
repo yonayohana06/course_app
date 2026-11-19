@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/course/presentation/screens/course_list_screen.dart';
@@ -32,6 +33,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                   final courseId = state.pathParameters['courseId'] ?? '';
                   final lessonId = state.pathParameters['lessonId'] ?? '';
                   return LessonPlayerScreen(
+                    key: ValueKey('player-$courseId-$lessonId'),
                     courseId: courseId,
                     lessonId: lessonId,
                   );
