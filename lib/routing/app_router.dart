@@ -10,7 +10,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/',
-        redirect: (_, __) => '/courses',
+        redirect: (context, state) => '/courses',
       ),
       GoRoute(
         path: '/courses',

@@ -104,7 +104,7 @@ class CourseListScreen extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: categories.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  separatorBuilder: (context, index) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final cat = categories[index];
                     final isSelected = cat == selectedCategory;
@@ -160,7 +160,8 @@ class CourseListScreen extends ConsumerWidget {
                       child: ListView.separated(
                         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                         itemCount: filteredList.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 16),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
                         itemBuilder: (context, index) {
                           final course = filteredList[index];
                           return CourseCard(

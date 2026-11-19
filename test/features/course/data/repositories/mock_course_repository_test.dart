@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:course_app/features/course/data/datasources/local_course_data_source.dart';
-import 'package:course_app/features/course/data/models/course_model.dart';
 import 'package:course_app/features/course/data/repositories/mock_course_repository.dart';
 
 void main() {

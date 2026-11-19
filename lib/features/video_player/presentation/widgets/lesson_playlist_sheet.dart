@@ -67,7 +67,7 @@ class LessonPlaylistSheet extends StatelessWidget {
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: lessons.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (context, index) =>
                   const Divider(height: 1, indent: 64, color: AppColors.borderLight),
               itemBuilder: (context, index) {
                 final lesson = lessons[index];

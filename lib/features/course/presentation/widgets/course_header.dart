@@ -25,7 +25,8 @@ class CourseHeader extends StatelessWidget {
                   ? Image.network(
                       course.thumbnailUrl,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _buildPlaceholder(),
+                      errorBuilder: (context, error, stackTrace) =>
+                          _buildPlaceholder(),
                     )
                   : _buildPlaceholder(),
               // Gradient Overlay
