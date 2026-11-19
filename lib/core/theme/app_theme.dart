@@ -23,7 +23,6 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.backgroundLight,
       fontFamily: 'Roboto',
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 1,
         centerTitle: false,
