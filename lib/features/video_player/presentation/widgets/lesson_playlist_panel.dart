@@ -37,10 +37,10 @@ class LessonPlaylistPanel extends StatelessWidget {
         ],
         Padding(
           padding: EdgeInsets.fromLTRB(
-            AppSpacing.lg,
-            isBottomSheet ? AppSpacing.md : AppSpacing.lg,
-            AppSpacing.lg,
-            AppSpacing.md,
+            AppSpacing.base,
+            isBottomSheet ? AppSpacing.md : AppSpacing.base,
+            AppSpacing.base,
+            AppSpacing.sm,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,7 +93,7 @@ class LessonPlaylistPanel extends StatelessWidget {
       itemCount: lessons.length,
       separatorBuilder: (context, index) => const Divider(
         height: 1,
-        indent: 64,
+        indent: 60,
         color: AppColors.borderLight,
       ),
       itemBuilder: (context, index) {
@@ -102,7 +102,7 @@ class LessonPlaylistPanel extends StatelessWidget {
 
         return ListTile(
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
+            horizontal: AppSpacing.base,
             vertical: 2,
           ),
           leading: Container(
@@ -138,19 +138,35 @@ class LessonPlaylistPanel extends StatelessWidget {
               color: isActive ? AppColors.primary : AppColors.textPrimaryLight,
             ),
           ),
-          subtitle: Text(
-            lesson.duration,
-            style: AppTypography.labelSmall,
-          ),
-          trailing: isActive
-              ? Text(
-                  'Diputar',
-                  style: AppTypography.labelSmall.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
+          subtitle: Row(
+            children: [
+              Text(
+                lesson.duration,
+                style: AppTypography.labelSmall,
+              ),
+              if (isActive) ...[
+                AppSpacing.horizontalXs,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xs,
+                    vertical: 1,
                   ),
-                )
-              : null,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.12),
+                    borderRadius: AppRadius.borderXs,
+                  ),
+                  child: Text(
+                    'Diputar',
+                    style: AppTypography.labelSmall.copyWith(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
           onTap: () {
             if (isBottomSheet) {
               Navigator.of(context).pop();

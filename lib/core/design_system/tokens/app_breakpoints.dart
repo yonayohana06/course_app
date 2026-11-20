@@ -56,13 +56,20 @@ extension ResponsiveContext on BuildContext {
   bool get isPortrait =>
       MediaQuery.orientationOf(this) == Orientation.portrait;
 
+  /// Whether current screen height is compact (< 480 dp), typical of phones in landscape.
+  bool get isCompactHeight => screenHeight < 480.0;
+
+  /// Whether current device is a smartphone in landscape orientation.
+  bool get isPhoneLandscape => isLandscape && isCompactHeight;
+
   /// Whether to use two-column split view.
   /// On tablets/foldables in portrait (e.g. iPad 11" 820x1180), height dominates width,
   /// so a centered single-column layout is cleaner than squeezing content horizontally.
-  /// Split view is enabled when in landscape orientation on tablet/foldable screens,
-  /// or on extra-wide screens (width >= 1000 dp).
+  /// Split view is enabled when:
+  /// - Screen width is >= 700 dp and in landscape (both tablets and phones in landscape)
+  /// - Or on extra-wide screens (width >= 1000 dp).
   bool get useSplitView =>
-      (isTabletOrFoldable && isLandscape) || screenWidth >= 1000.0;
+      (screenWidth >= 700.0 && isLandscape) || screenWidth >= 1000.0;
 
   /// Returns responsive value according to current screen breakpoint.
   T responsiveValue<T>({
@@ -84,7 +91,11 @@ extension ResponsiveContext on BuildContext {
 
   /// Calculates optimal grid column count for course catalog.
   int get courseGridColumns {
-    if (isExpanded) return 3;
+    if (isExpanded) {
+      // In landscape phone (e.g. iPhone 15 852x393), 2 columns prevents cramped cards.
+      if (isCompactHeight) return 2;
+      return 3;
+    }
     if (isMedium) return 2;
     return 1;
   }

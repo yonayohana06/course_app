@@ -20,8 +20,11 @@ class CourseDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final courseAsync = ref.watch(courseDetailProvider(courseId));
 
+    final bool isCompactH = context.isCompactHeight;
+
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: isCompactH ? 48.0 : kToolbarHeight,
         title: const Text('Detail Kursus'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
@@ -34,21 +37,24 @@ class CourseDetailScreen extends ConsumerWidget {
           },
         ),
       ),
-      body: courseAsync.when(
-        loading: () => const AppLoadingIndicator(
-          message: 'Memuat detail kursus...',
-        ),
-        error: (err, _) => ErrorStateView(
-          message: err.toString().replaceAll('Exception: ', ''),
-          onRetry: () => ref.refresh(courseDetailProvider(courseId)),
-        ),
-        data: (course) {
-          if (context.useSplitView) {
-            return _buildWideLayout(context, course);
-          }
+      body: SafeArea(
+        top: false,
+        child: courseAsync.when(
+          loading: () => const AppLoadingIndicator(
+            message: 'Memuat detail kursus...',
+          ),
+          error: (err, _) => ErrorStateView(
+            message: err.toString().replaceAll('Exception: ', ''),
+            onRetry: () => ref.refresh(courseDetailProvider(courseId)),
+          ),
+          data: (course) {
+            if (context.useSplitView) {
+              return _buildWideLayout(context, course);
+            }
 
-          return _buildCompactLayout(context, course);
-        },
+            return _buildCompactLayout(context, course);
+          },
+        ),
       ),
     );
   }
@@ -117,8 +123,21 @@ class CourseDetailScreen extends ConsumerWidget {
     );
   }
 
-  /// Two-column split layout for wide screens and tablet/foldable landscape
+  /// Two-column split layout for wide screens, tablets, and phones in landscape
   Widget _buildWideLayout(BuildContext context, Course course) {
+    final bool isCompactH = context.isCompactHeight;
+    final int leftFlex = isCompactH ? 55 : 6;
+    final int rightFlex = isCompactH ? 45 : 4;
+    final double horizontalPadding = isCompactH
+        ? AppSpacing.sm
+        : context.responsiveValue<double>(
+            compact: AppSpacing.base,
+            medium: AppSpacing.base,
+            expanded: AppSpacing.lg,
+          );
+    final double verticalPadding = isCompactH ? AppSpacing.xs : AppSpacing.base;
+    final double columnSpacing = isCompactH ? AppSpacing.sm : AppSpacing.base;
+
     return Align(
       alignment: Alignment.topCenter,
       child: ConstrainedBox(
@@ -127,19 +146,15 @@ class CourseDetailScreen extends ConsumerWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.responsiveValue<double>(
-              compact: AppSpacing.base,
-              medium: AppSpacing.base,
-              expanded: AppSpacing.lg,
-            ),
-            vertical: AppSpacing.base,
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Left Column: Course Header & Description (flex 6)
+              // Left Column: Course Header & Description
               Expanded(
-                flex: 6,
+                flex: leftFlex,
                 child: SingleChildScrollView(
                   child: Card(
                     clipBehavior: Clip.antiAlias,
@@ -153,11 +168,11 @@ class CourseDetailScreen extends ConsumerWidget {
                 ),
               ),
 
-              AppSpacing.horizontalBase,
+              SizedBox(width: columnSpacing),
 
-              // Right Column: Lesson List Panel (flex 4)
+              // Right Column: Lesson List Panel
               Expanded(
-                flex: 4,
+                flex: rightFlex,
                 child: SingleChildScrollView(
                   child: Card(
                     clipBehavior: Clip.antiAlias,

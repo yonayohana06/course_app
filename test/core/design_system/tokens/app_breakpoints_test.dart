@@ -117,12 +117,37 @@ void main() {
       expect(capturedContext.isTabletOrFoldable, isTrue);
       expect(capturedContext.isPortrait, isFalse);
       expect(capturedContext.isLandscape, isTrue);
+      expect(capturedContext.isCompactHeight, isFalse);
+      expect(capturedContext.isPhoneLandscape, isFalse);
       expect(capturedContext.useSplitView, isTrue);
       expect(capturedContext.courseGridColumns, 3);
       expect(
         capturedContext.responsiveValue(compact: 'phone', medium: 'fold', expanded: 'tablet'),
         'tablet',
       );
+
+      // 5. Test iPhone 15 Landscape (852x393)
+      tester.view.physicalSize = const Size(852, 393);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (ctx) {
+              capturedContext = ctx;
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+
+      expect(capturedContext.isCompact, isFalse);
+      expect(capturedContext.isExpanded, isTrue);
+      expect(capturedContext.isPortrait, isFalse);
+      expect(capturedContext.isLandscape, isTrue);
+      expect(capturedContext.isCompactHeight, isTrue);
+      expect(capturedContext.isPhoneLandscape, isTrue);
+      expect(capturedContext.useSplitView, isTrue);
+      // In phone landscape, 2 columns are used instead of 3 to avoid cramped cards
+      expect(capturedContext.courseGridColumns, 2);
     });
   });
 }

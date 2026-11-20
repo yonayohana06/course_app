@@ -36,9 +36,11 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
     final coursesAsync = ref.watch(courseListControllerProvider);
     final filteredCoursesAsync = ref.watch(filteredCourseListProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
+    final bool isCompactH = context.isCompactHeight;
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: isCompactH ? 48.0 : kToolbarHeight,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,10 +48,11 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
               'E-Learning Platform',
               style: AppTypography.heading2,
             ),
-            Text(
-              'Tingkatkan skill engineering Anda',
-              style: AppTypography.labelSmall,
-            ),
+            if (!isCompactH)
+              Text(
+                'Tingkatkan skill engineering Anda',
+                style: AppTypography.labelSmall,
+              ),
           ],
         ),
         actions: [
@@ -62,7 +65,9 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
           ),
         ],
       ),
-      body: coursesAsync.when(
+      body: SafeArea(
+        top: false,
+        child: coursesAsync.when(
         loading: () => const AppLoadingIndicator(
           message: 'Memuat daftar kursus...',
         ),
@@ -210,7 +215,7 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
                                     crossAxisCount: context.courseGridColumns,
                                     crossAxisSpacing: AppSpacing.base,
                                     mainAxisSpacing: AppSpacing.base,
-                                    mainAxisExtent: 390,
+                                    mainAxisExtent: 420,
                                   ),
                                   itemCount: filteredList.length,
                                   itemBuilder: (context, index) {
@@ -233,6 +238,7 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
           );
         },
       ),
-    );
-  }
+    ),
+  );
+}
 }

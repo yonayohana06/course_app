@@ -136,9 +136,11 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     });
 
     final bool useSplitView = context.useSplitView;
+    final bool isCompactH = context.isCompactHeight;
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: isCompactH ? 48.0 : kToolbarHeight,
         title: Text(
           lessonAsync.value?.currentLesson?.title ?? 'Pemutar Video',
           maxLines: 1,
@@ -177,38 +179,44 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             ),
         ],
       ),
-      body: lessonAsync.when(
-        loading: () => const AppLoadingIndicator(
-          message: 'Memuat data materi...',
+      body: SafeArea(
+        top: false,
+        left: true,
+        right: true,
+        bottom: true,
+        child: lessonAsync.when(
+          loading: () => const AppLoadingIndicator(
+            message: 'Memuat data materi...',
+          ),
+          error: (err, _) => ErrorStateView(
+            message: err.toString().replaceAll('Exception: ', ''),
+            onRetry: () => ref.refresh(lessonDetailProvider(param)),
+          ),
+          data: (playerState) {
+            final lesson = playerState.currentLesson;
+            if (lesson == null) {
+              return const Center(child: Text('Materi tidak ditemukan'));
+            }
+
+            // Initial load for video player
+            if (_videoPlayerController == null &&
+                !_isInitializingVideo &&
+                _videoError == null &&
+                _currentLoadedVideoUrl != lesson.videoUrl) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  _initializePlayer(lesson.videoUrl);
+                }
+              });
+            }
+
+            if (useSplitView) {
+              return _buildWideLayout(lesson, playerState);
+            }
+
+            return _buildCompactLayout(lesson, playerState);
+          },
         ),
-        error: (err, _) => ErrorStateView(
-          message: err.toString().replaceAll('Exception: ', ''),
-          onRetry: () => ref.refresh(lessonDetailProvider(param)),
-        ),
-        data: (playerState) {
-          final lesson = playerState.currentLesson;
-          if (lesson == null) {
-            return const Center(child: Text('Materi tidak ditemukan'));
-          }
-
-          // Initial load for video player
-          if (_videoPlayerController == null &&
-              !_isInitializingVideo &&
-              _videoError == null &&
-              _currentLoadedVideoUrl != lesson.videoUrl) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                _initializePlayer(lesson.videoUrl);
-              }
-            });
-          }
-
-          if (useSplitView) {
-            return _buildWideLayout(lesson, playerState);
-          }
-
-          return _buildCompactLayout(lesson, playerState);
-        },
       ),
     );
   }
@@ -235,8 +243,24 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     );
   }
 
-  /// Two-column layout for wide screens and tablet/foldable landscape
+  /// Two-column layout for wide screens, tablets, and phones in landscape
   Widget _buildWideLayout(Lesson lesson, LessonPlayerState playerState) {
+    final bool isCompactH = context.isCompactHeight;
+    // Balanced 58/42 flex on compact landscape (iPhone) gives ample room for playlist titles,
+    // while 65/35 is used on spacious tablet/desktop displays.
+    final int leftFlex = isCompactH ? 58 : 65;
+    final int rightFlex = isCompactH ? 42 : 35;
+
+    final double horizontalPadding = isCompactH
+        ? AppSpacing.sm
+        : context.responsiveValue<double>(
+            compact: AppSpacing.base,
+            medium: AppSpacing.xl,
+            expanded: AppSpacing.xxl,
+          );
+    final double verticalPadding = isCompactH ? AppSpacing.xs : AppSpacing.base;
+    final double columnSpacing = isCompactH ? AppSpacing.sm : AppSpacing.base;
+
     return Align(
       alignment: Alignment.topCenter,
       child: ConstrainedBox(
@@ -245,19 +269,15 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.responsiveValue<double>(
-              compact: AppSpacing.base,
-              medium: AppSpacing.xl,
-              expanded: AppSpacing.xxl,
-            ),
-            vertical: AppSpacing.base,
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Left Column: Video player viewport & lesson info (flex 65)
+              // Left Column: Video player viewport & lesson info
               Expanded(
-                flex: 65,
+                flex: leftFlex,
                 child: SingleChildScrollView(
                   child: Card(
                     clipBehavior: Clip.antiAlias,
@@ -271,7 +291,9 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                       children: [
                         _buildVideoViewport(lesson),
                         Padding(
-                          padding: AppSpacing.paddingCard,
+                          padding: isCompactH
+                              ? const EdgeInsets.all(AppSpacing.md)
+                              : AppSpacing.paddingCard,
                           child: _buildLessonDetails(lesson, playerState),
                         ),
                       ],
@@ -280,12 +302,12 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                 ),
               ),
 
-              AppSpacing.horizontalBase,
+              SizedBox(width: columnSpacing),
 
-              // Right Column: In-place Lesson Playlist Sidebar (flex 35)
+              // Right Column: In-place Lesson Playlist Sidebar
               if (playerState.course != null)
                 Expanded(
-                  flex: 35,
+                  flex: rightFlex,
                   child: SingleChildScrollView(
                     child: LessonPlaylistPanel(
                       lessons: playerState.course!.lessons,

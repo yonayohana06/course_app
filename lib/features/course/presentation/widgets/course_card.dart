@@ -91,9 +91,9 @@ class CourseCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppTypography.bodySmall,
                   ),
-                  AppSpacing.verticalMd,
+                  AppSpacing.verticalSm,
                   const Divider(height: 1, color: AppColors.borderLight),
-                  AppSpacing.verticalMd,
+                  AppSpacing.verticalSm,
                   // Metadata row: Instructor, lessons, duration
                   Row(
                     children: [

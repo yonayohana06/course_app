@@ -178,9 +178,10 @@ void main() {
       expect(find.byIcon(Icons.playlist_play_rounded), findsNothing);
     });
 
-    testWidgets('LessonPlayerScreen embeds LessonPlaylistPanel in sidebar on tablet width',
+    testWidgets(
+        'iPhone 15 Landscape (852x393): LessonPlayerScreen uses compact split layout with SafeArea',
         (tester) async {
-      tester.view.physicalSize = const Size(900, 700);
+      tester.view.physicalSize = const Size(852, 393);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() => tester.view.resetPhysicalSize());
 
@@ -190,9 +191,33 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
 
-      // On wide layout, LessonPlaylistPanel is embedded directly on screen
+      // Uses split view (embedded LessonPlaylistPanel on the right)
       expect(find.byType(LessonPlaylistPanel), findsOneWidget);
+      // Wrapped in SafeArea to avoid Dynamic Island cutouts
+      expect(find.byType(SafeArea), findsWidgets);
+      // Playlist active badge 'Diputar' and lesson titles are rendered cleanly
       expect(find.text('Breakpoints & Layouts'), findsWidgets);
+      expect(find.text('Diputar'), findsOneWidget);
+    });
+
+    testWidgets(
+        'iPhone 15 Landscape (852x393): CourseListScreen uses 2 columns to prevent cramped cards',
+        (tester) async {
+      tester.view.physicalSize = const Size(852, 393);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(createScope(const CourseListScreen()));
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // Uses GridView with 2 columns
+      final gridViewFinder = find.byType(GridView);
+      expect(gridViewFinder, findsOneWidget);
+      final GridView gridView = tester.widget(gridViewFinder);
+      final delegate =
+          gridView.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+      expect(delegate.crossAxisCount, 2);
     });
   });
 }
