@@ -4,18 +4,18 @@
   "data": [
     {
       "id": "course-1",
-      "title": "Mastering Flutter & Riverpod Architecture",
-      "tagline": "Pelajari state management modern, clean architecture, dan scalable mobile code.",
-      "description": "Kursus komprehensif untuk menguasai Flutter dari level dasar hingga mahir. Anda akan mempelajari arsitektur berbasis Riverpod, asynchronous state handling, caching, dan best practices performa aplikasi mobile skala industri.",
+      "title": "Tutorial Dasar Flutter",
+      "tagline": "Pelajari framework Flutter, sintaks Dart, hingga widget Stateless & Stateful.",
+      "description": "Kursus komprehensif untuk memulai belajar Flutter. Mempelajari fundamental framework, dasar bahasa Dart (OOP, Extends, Mixin), serta pemahaman siklus hidup widget Stateless dan Stateful.",
       "instructor": {
-        "name": "Budi Santoso",
+        "name": "Kuldii Project",
         "role": "Senior Mobile Engineer",
         "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
       },
       "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600",
       "category": "Mobile Development",
-      "level": "Intermediate",
-      "total_duration": "45 menit",
+      "level": "Beginner",
+      "total_duration": "42 menit",
       "rating": 4.9,
       "lessons_count": 3,
       "lessons": [
@@ -23,48 +23,48 @@
           "id": "lesson-101",
           "course_id": "course-1",
           "order": 1,
-          "title": "Pengenalan Arsitektur E-Learning & Setup",
-          "duration": "09:56",
-          "duration_seconds": 596,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-          "summary": "Memahami pondasi arsitektur Feature-First, pemilihan package state management, dan struktur folder proyek e-learning."
+          "title": "Pengenalan Flutter",
+          "duration": "10:40",
+          "duration_seconds": 640,
+          "video_url": "https://yonayohana06.github.io/course/course_1/01-Pengenalan Flutter.mp4",
+          "summary": "Pengenalan ekosistem framework Flutter, persiapan lingkungan proyek, struktur berkas bawaan, serta cara menjalankan proses build dan debug pada emulator/device."
         },
         {
           "id": "lesson-102",
           "course_id": "course-1",
           "order": 2,
-          "title": "Implementasi State Management Riverpod",
-          "duration": "10:53",
-          "duration_seconds": 653,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-          "summary": "Membedah StateNotifier / AsyncNotifier, ref.watch, serta penanganan 4 kondisi state: Loading, Empty, Error, dan Data."
+          "title": "Dart Basic, Extends, Mixin",
+          "duration": "24:41",
+          "duration_seconds": 1481,
+          "video_url": "https://yonayohana06.github.io/course/course_1/02-Dart Basic, Extends, Mixin.mp4",
+          "summary": "Mempelajari konsep Object-Oriented Programming (OOP) pada Dart, mekanisme pewarisan kelas menggunakan extends, dan pemanfaatan mixin untuk menyusun kode yang modular."
         },
         {
           "id": "lesson-103",
           "course_id": "course-1",
           "order": 3,
-          "title": "Optimasi Video Player & Memory Management",
-          "duration": "00:15",
-          "duration_seconds": 15,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-          "summary": "Teknik controller disposal yang aman untuk menghindari memory leak saat navigasi antar materi kursus."
+          "title": "Stateless vs Stateful",
+          "duration": "06:21",
+          "duration_seconds": 381,
+          "video_url": "https://yonayohana06.github.io/course/course_1/03-Stateless vs Stateful.mp4",
+          "summary": "Memahami perbedaan mendasar antara StatelessWidget dan StatefulWidget, kapan harus mengelola state lokal, serta cara kerja fungsi setState() dalam memperbarui antarmuka."
         }
       ]
     },
     {
       "id": "course-2",
-      "title": "Clean Architecture & Testing in Flutter",
-      "tagline": "Membangun kode aplikasi yang tahan uji, scalable, dan mudah dirawat.",
-      "description": "Pelajari cara memisahkan presentation, domain, dan data layer secara rapi serta menulis unit test, widget test, dan mocking dependencies menggunakan mocktail secara efektif.",
+      "title": "Flutter Development Tools & Workspace",
+      "tagline": "Persiapan lingkungan kerja VS Code yang efisien dan manajemen package dependensi.",
+      "description": "Pelajari alur kerja developer Flutter profesional dengan mengonfigurasi editor VS Code, memasang ekstensi pembantu esensial, dan mengelola package eksternal dari pub.dev secara tepat.",
       "instructor": {
-        "name": "Siti Rahma",
-        "role": "Lead Mobile Architect",
+        "name": "Kuldii Project",
+        "role": "Senior Mobile Engineer",
         "avatar_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150"
       },
       "thumbnail_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600",
-      "category": "Architecture",
-      "level": "Advanced",
-      "total_duration": "30 menit",
+      "category": "Tools & Workflow",
+      "level": "Beginner",
+      "total_duration": "44 menit",
       "rating": 4.8,
       "lessons_count": 2,
       "lessons": [
@@ -72,60 +72,50 @@
           "id": "lesson-201",
           "course_id": "course-2",
           "order": 1,
-          "title": "Konsep Pemisahan Layer & Kontrak Repository",
-          "duration": "00:15",
-          "duration_seconds": 15,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-          "summary": "Penerapan repository pattern, pembuatan interface abstrak, dan decoupling business logic dari UI framework."
+          "title": "Introduction",
+          "duration": "21:35",
+          "duration_seconds": 1295,
+          "video_url": "https://yonayohana06.github.io/course/course_2/01-Introduction.mp4",
+          "summary": "Pengenalan alur kerja pengembangan aplikasi Flutter, gambaran umum materi kursus, dan orientasi setup editor agar proses coding berjalan lebih terstruktur dan cepat."
         },
         {
           "id": "lesson-202",
           "course_id": "course-2",
           "order": 2,
-          "title": "Unit Testing & Mocking Repository dengan Mocktail",
-          "duration": "00:15",
-          "duration_seconds": 15,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
-          "summary": "Strategi pengujian unit untuk controller dan repository secara terisolasi tanpa jaringan riil."
+          "title": "Package & Extension VS Code",
+          "duration": "22:24",
+          "duration_seconds": 1344,
+          "video_url": "https://yonayohana06.github.io/course/course_2/02-Package & Extension VS Code.mp4",
+          "summary": "Panduan menambahkan serta mengelola package dari pub.dev ke pubspec.yaml, disertai instalasi ekstensi VS Code pilihan untuk auto-complete, snippet, dan formatting otomatis."
         }
       ]
     },
     {
       "id": "course-3",
-      "title": "Flutter UI/UX Design System & Animation",
-      "tagline": "Merancang antarmuka modern Material 3 dan micro-interactions yang mulus.",
-      "description": "Kuasai seni membangun antarmuka Flutter berkelas dunia dengan Material 3, typography yang konsisten, dark mode dinamis, dan animasi transisi yang memanjakan pengguna.",
+      "title": "Flutter UI/UX Slicing",
+      "tagline": "Praktik langsung slicing desain antarmuka menjadi widget Flutter yang rapi dan responsif.",
+      "description": "Kuasai teknik mengubah rancangan antarmuka (mockup design) menjadi barisan widget Flutter yang terstruktur dan mudah dikelola untuk berbagai ukuran layar.",
       "instructor": {
-        "name": "Rian Kusuma",
-        "role": "Design Systems Specialist",
+        "name": "Kuldii Project",
+        "role": "Senior Mobile Engineer",
         "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
       },
       "thumbnail_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600",
       "category": "UI/UX Design",
       "level": "Beginner",
-      "total_duration": "25 menit",
+      "total_duration": "4 menit",
       "rating": 4.95,
-      "lessons_count": 2,
+      "lessons_count": 1,
       "lessons": [
         {
           "id": "lesson-301",
           "course_id": "course-3",
           "order": 1,
-          "title": "Pondasi Theme, Color Scheme, dan Typography Material 3",
-          "duration": "00:15",
-          "duration_seconds": 15,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-          "summary": "Membangun token desain yang konsisten dan mudah diatur di seluruh modul aplikasi."
-        },
-        {
-          "id": "lesson-302",
-          "course_id": "course-3",
-          "order": 2,
-          "title": "Animasi Transisi & Indikator Status Interaktif",
-          "duration": "00:15",
-          "duration_seconds": 15,
-          "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-          "summary": "Membuat transisi antar layar dan feedback visual saat buffering atau error terjadi."
+          "title": "Slicing",
+          "duration": "04:15",
+          "duration_seconds": 255,
+          "video_url": "https://yonayohana06.github.io/course/course_3/01-Slicing.mp4",
+          "summary": "Praktik langsung slicing komponen antarmuka dari desain mockup ke dalam barisan widget Flutter menggunakan tata letak Container, Row, dan Column secara modular."
         }
       ]
     }
