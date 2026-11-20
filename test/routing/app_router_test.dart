@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -11,8 +12,10 @@ import 'package:course_app/features/video_player/presentation/screens/lesson_pla
 import 'package:course_app/routing/app_router.dart';
 import 'package:course_app/main.dart';
 
-class FakeRouterRepository implements CourseRepository {
-  static const dummyCourse = Course(
+class MockCourseRepository extends Mock implements CourseRepository {}
+
+void main() {
+  const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Architecture',
     tagline: 'Deep dive',
@@ -38,25 +41,25 @@ class FakeRouterRepository implements CourseRepository {
     ],
   );
 
-  @override
-  Future<List<Course>> getCourses() async => [dummyCourse];
+  late MockCourseRepository mockRepository;
 
-  @override
-  Future<Course> getCourseById(String id) async => dummyCourse;
+  setUp(() {
+    mockRepository = MockCourseRepository();
+    when(() => mockRepository.getCourses())
+        .thenAnswer((_) async => [dummyCourse]);
+    when(() => mockRepository.getCourseById(any()))
+        .thenAnswer((_) async => dummyCourse);
+    when(() => mockRepository.getLessonById(any(), any()))
+        .thenAnswer((_) async => dummyCourse.lessons.first);
+  });
 
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async =>
-      dummyCourse.lessons.first;
-}
-
-void main() {
   group('AppRouter', () {
     testWidgets('initial route redirects to /courses and renders CourseListScreen',
         (tester) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            courseRepositoryProvider.overrideWithValue(FakeRouterRepository()),
+            courseRepositoryProvider.overrideWithValue(mockRepository),
           ],
           child: const CourseApp(),
         ),
@@ -72,7 +75,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            courseRepositoryProvider.overrideWithValue(FakeRouterRepository()),
+            courseRepositoryProvider.overrideWithValue(mockRepository),
           ],
           child: const CourseApp(),
         ),
@@ -94,7 +97,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            courseRepositoryProvider.overrideWithValue(FakeRouterRepository()),
+            courseRepositoryProvider.overrideWithValue(mockRepository),
           ],
           child: const CourseApp(),
         ),

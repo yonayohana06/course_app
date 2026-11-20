@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -11,8 +12,10 @@ import 'package:course_app/features/course/presentation/screens/course_detail_sc
 import 'package:course_app/features/video_player/presentation/screens/lesson_player_screen.dart';
 import 'package:course_app/features/video_player/presentation/widgets/lesson_playlist_panel.dart';
 
-class FakeResponsiveRepository implements CourseRepository {
-  static const dummyCourse = Course(
+class MockCourseRepository extends Mock implements CourseRepository {}
+
+void main() {
+  const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Responsive Design',
     tagline: 'Adaptive UI for Foldables & Tablets',
@@ -48,22 +51,26 @@ class FakeResponsiveRepository implements CourseRepository {
     ],
   );
 
-  @override
-  Future<List<Course>> getCourses() async => [dummyCourse];
+  late MockCourseRepository mockRepository;
 
-  @override
-  Future<Course> getCourseById(String id) async => dummyCourse;
+  setUp(() {
+    mockRepository = MockCourseRepository();
+    when(() => mockRepository.getCourses())
+        .thenAnswer((_) async => [dummyCourse]);
+    when(() => mockRepository.getCourseById(any()))
+        .thenAnswer((_) async => dummyCourse);
+    when(() => mockRepository.getLessonById(any(), any())).thenAnswer(
+      (invocation) async {
+        final lessonId = invocation.positionalArguments[1] as String;
+        return dummyCourse.lessons.firstWhere((l) => l.id == lessonId);
+      },
+    );
+  });
 
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async =>
-      dummyCourse.lessons.firstWhere((l) => l.id == lessonId);
-}
-
-void main() {
   Widget createScope(Widget child) {
     return ProviderScope(
       overrides: [
-        courseRepositoryProvider.overrideWithValue(FakeResponsiveRepository()),
+        courseRepositoryProvider.overrideWithValue(mockRepository),
       ],
       child: MaterialApp(
         home: child,
