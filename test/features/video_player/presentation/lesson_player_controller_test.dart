@@ -4,7 +4,7 @@ import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
 import 'package:course_app/features/course/domain/repositories/course_repository.dart';
-import 'package:course_app/features/course/data/repositories/mock_course_repository.dart';
+import 'package:course_app/features/course/data/repositories/course_repository_impl.dart';
 import 'package:course_app/features/video_player/domain/entities/player_state.dart';
 import 'package:course_app/features/video_player/presentation/controllers/lesson_player_controller.dart';
 

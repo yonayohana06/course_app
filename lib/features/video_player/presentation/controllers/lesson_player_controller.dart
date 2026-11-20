@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../course/data/repositories/mock_course_repository.dart';
+import '../../../course/data/repositories/course_repository_impl.dart';
 import '../../domain/entities/player_state.dart';
 
 class LessonPlayerParam {

@@ -10,15 +10,15 @@ final courseDataSourceProvider = Provider<CourseDataSource>((ref) {
 
 final courseRepositoryProvider = Provider<CourseRepository>((ref) {
   final dataSource = ref.watch(courseDataSourceProvider);
-  return MockCourseRepository(dataSource: dataSource);
+  return CourseRepositoryImpl(dataSource: dataSource);
 });
 
-class MockCourseRepository implements CourseRepository {
+class CourseRepositoryImpl implements CourseRepository {
   final CourseDataSource dataSource;
   final Duration simulatedDelay;
   final bool shouldFail;
 
-  MockCourseRepository({
+  CourseRepositoryImpl({
     required this.dataSource,
     this.simulatedDelay = Duration.zero,
     this.shouldFail = false,

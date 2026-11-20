@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:course_app/features/course/data/datasources/local_course_data_source.dart';
-import 'package:course_app/features/course/data/repositories/mock_course_repository.dart';
+import 'package:course_app/features/course/data/repositories/course_repository_impl.dart';
 
 void main() {
-  group('MockCourseRepository', () {
+  group('CourseRepositoryImpl', () {
     const rawJson = '''
     {
       "status": "success",
@@ -38,13 +38,13 @@ void main() {
     ''';
 
     late LocalCourseDataSource dataSource;
-    late MockCourseRepository repository;
+    late CourseRepositoryImpl repository;
 
     setUp(() {
       dataSource = LocalCourseDataSource(
         customLoader: (_) async => rawJson,
       );
-      repository = MockCourseRepository(dataSource: dataSource);
+      repository = CourseRepositoryImpl(dataSource: dataSource);
     });
 
     test('getCourses returns list of Course entities', () async {
@@ -78,7 +78,7 @@ void main() {
     });
 
     test('throws exception when shouldFail is true', () async {
-      final failingRepo = MockCourseRepository(
+      final failingRepo = CourseRepositoryImpl(
         dataSource: dataSource,
         shouldFail: true,
       );

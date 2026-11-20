@@ -23,8 +23,8 @@ flowchart TD
     end
 
     subgraph Data Layer
-        RepoImpl["Repository Implementation<br/>- MockCourseRepository"]
-        DataSource["Data Sources<br/>- LocalCourseDataSource / REST API"]
+        RepoImpl["Repository Implementation<br/>- CourseRepositoryImpl"]
+        DataSource["Data Sources<br/>- LocalCourseDataSource / RemoteCourseDataSource"]
         Models["Data Models & DTOs<br/>- CourseModel<br/>- LessonModel<br/>- InstructorModel"]
     end
 
@@ -248,12 +248,12 @@ class HttpCourseRepository implements CourseRepository {
 }
 ```
 
-Lalu cukup ubah provider di `mock_course_repository.dart` atau file dependency injection:
+Lalu cukup ubah provider data source di `course_repository_impl.dart`:
 
 ```dart
-final courseRepositoryProvider = Provider<CourseRepository>((ref) {
-  // Ganti MockCourseRepository dengan HttpCourseRepository
-  return HttpCourseRepository(dio: ref.watch(dioProvider));
+final courseDataSourceProvider = Provider<CourseDataSource>((ref) {
+  // Beralih dari LocalCourseDataSource ke RemoteCourseDataSource
+  return RemoteCourseDataSource(dio: ref.watch(dioProvider));
 });
 ```
 

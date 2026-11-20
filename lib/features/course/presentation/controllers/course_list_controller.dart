@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/entities/course.dart';
-import '../../data/repositories/mock_course_repository.dart';
+import '../../data/repositories/course_repository_impl.dart';
 
 class SelectedCategoryNotifier extends Notifier<String> {
   @override
