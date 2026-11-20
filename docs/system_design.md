@@ -131,16 +131,16 @@ sequenceDiagram
     autonumber
     actor User as Pengguna (Student)
 
-    box rgb(227, 242, 253) Presentation Layer
+    box rgba(96, 183, 246, 1) Presentation Layer
         participant UI as LessonPlayerScreen
         participant Controller as LessonPlayerNotifier
     end
 
-    box rgb(232, 245, 233) Domain Layer
+    box rgba(91, 250, 104, 1) Domain Layer
         participant Repo as CourseRepository
     end
 
-    box rgb(255, 243, 224) Media / Platform
+    box rgba(250, 181, 70, 1) Media / Platform
         participant Player as VideoPlayer / ChewieController
     end
 
