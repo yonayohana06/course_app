@@ -88,6 +88,23 @@ void main() {
       expect(find.text('Kembali'), findsOneWidget);
     });
 
+    testWidgets('AppButton.outline disables button when onPressed is null',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: AppButton.outline(
+              label: 'Sebelumnya',
+              onPressed: null,
+            ),
+          ),
+        ),
+      );
+
+      final button = tester.widget<OutlinedButton>(find.byType(OutlinedButton));
+      expect(button.onPressed, isNull);
+    });
+
     testWidgets('AppButton.text renders TextButton', (tester) async {
       await tester.pumpWidget(
         MaterialApp(

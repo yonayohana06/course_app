@@ -87,13 +87,15 @@ void main() {
       expect(find.text('Sebelumnya'), findsOneWidget);
     });
 
-    testWidgets('displays navigation buttons with correct enabled/disabled state',
+    testWidgets(
+        'displays navigation buttons with correct enabled/disabled state on first lesson',
         (tester) async {
       await tester.pumpWidget(createWidgetUnderTest('l1'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
 
-      // For l1, "Sebelumnya" should be disabled because order is 1
+      // For l1 (first lesson):
+      // "Sebelumnya" should be disabled because it is the first lesson
       final prevButton = tester.widget<OutlinedButton>(
         find.widgetWithText(OutlinedButton, 'Sebelumnya'),
       );
@@ -104,6 +106,27 @@ void main() {
         find.widgetWithText(ElevatedButton, 'Berikutnya'),
       );
       expect(nextButton.onPressed, isNotNull);
+    });
+
+    testWidgets(
+        'displays navigation buttons with correct enabled/disabled state on second/last lesson',
+        (tester) async {
+      await tester.pumpWidget(createWidgetUnderTest('l2'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // For l2 (second lesson):
+      // "Sebelumnya" should be enabled because l1 exists
+      final prevButton = tester.widget<OutlinedButton>(
+        find.widgetWithText(OutlinedButton, 'Sebelumnya'),
+      );
+      expect(prevButton.onPressed, isNotNull);
+
+      // "Berikutnya" should be disabled because l2 is the last lesson
+      final nextButton = tester.widget<ElevatedButton>(
+        find.widgetWithText(ElevatedButton, 'Berikutnya'),
+      );
+      expect(nextButton.onPressed, isNull);
     });
   });
 }

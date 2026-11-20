@@ -58,11 +58,19 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget content;
+    final bool isEnabled = onPressed != null && !isLoading;
 
-    final isLightVariant =
-        variant == AppButtonVariant.outline || variant == AppButtonVariant.text;
-    final primaryTextColor = isLightVariant ? AppColors.primary : Colors.white;
+    Color effectiveForegroundColor;
+    if (!isEnabled) {
+      effectiveForegroundColor = const Color(0xFF94A3B8); // Slate 400 (disabled)
+    } else if (variant == AppButtonVariant.outline ||
+        variant == AppButtonVariant.text) {
+      effectiveForegroundColor = AppColors.primary;
+    } else {
+      effectiveForegroundColor = Colors.white;
+    }
+
+    Widget content;
 
     if (isLoading) {
       content = SizedBox(
@@ -70,14 +78,14 @@ class AppButton extends StatelessWidget {
         width: 20,
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          color: primaryTextColor,
+          color: effectiveForegroundColor,
         ),
       );
     } else {
       final textWidget = Text(
         label,
         style: AppTypography.button.copyWith(
-          color: primaryTextColor,
+          color: effectiveForegroundColor,
         ),
       );
 
@@ -89,7 +97,7 @@ class AppButton extends StatelessWidget {
             Icon(
               icon,
               size: 18,
-              color: primaryTextColor,
+              color: effectiveForegroundColor,
             ),
             AppSpacing.horizontalSm,
             textWidget,
@@ -106,8 +114,12 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.primary:
         button = ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: Colors.white,
+            backgroundColor:
+                isEnabled ? AppColors.primary : const Color(0xFFE2E8F0),
+            foregroundColor:
+                isEnabled ? Colors.white : const Color(0xFF94A3B8),
+            disabledBackgroundColor: const Color(0xFFE2E8F0),
+            disabledForegroundColor: const Color(0xFF94A3B8),
             elevation: 0,
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg,
@@ -117,7 +129,7 @@ class AppButton extends StatelessWidget {
               borderRadius: AppRadius.borderMd,
             ),
           ),
-          onPressed: isLoading ? null : onPressed,
+          onPressed: isEnabled ? onPressed : null,
           child: content,
         );
         break;
@@ -125,8 +137,12 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.secondary:
         button = ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryLight,
-            foregroundColor: Colors.white,
+            backgroundColor:
+                isEnabled ? AppColors.primaryLight : const Color(0xFFE2E8F0),
+            foregroundColor:
+                isEnabled ? Colors.white : const Color(0xFF94A3B8),
+            disabledBackgroundColor: const Color(0xFFE2E8F0),
+            disabledForegroundColor: const Color(0xFF94A3B8),
             elevation: 0,
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg,
@@ -136,7 +152,7 @@ class AppButton extends StatelessWidget {
               borderRadius: AppRadius.borderMd,
             ),
           ),
-          onPressed: isLoading ? null : onPressed,
+          onPressed: isEnabled ? onPressed : null,
           child: content,
         );
         break;
@@ -145,7 +161,16 @@ class AppButton extends StatelessWidget {
         button = OutlinedButton(
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.primary,
-            side: const BorderSide(color: AppColors.borderLight, width: 1.5),
+            disabledForegroundColor: const Color(0xFF94A3B8),
+            backgroundColor:
+                isEnabled ? Colors.transparent : const Color(0xFFF8FAFC),
+            disabledBackgroundColor: const Color(0xFFF8FAFC),
+            side: BorderSide(
+              color: isEnabled
+                  ? AppColors.primary.withValues(alpha: 0.5)
+                  : const Color(0xFFE2E8F0),
+              width: 1.5,
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg,
               vertical: AppSpacing.md,
@@ -154,7 +179,7 @@ class AppButton extends StatelessWidget {
               borderRadius: AppRadius.borderMd,
             ),
           ),
-          onPressed: isLoading ? null : onPressed,
+          onPressed: isEnabled ? onPressed : null,
           child: content,
         );
         break;
@@ -163,6 +188,7 @@ class AppButton extends StatelessWidget {
         button = TextButton(
           style: TextButton.styleFrom(
             foregroundColor: AppColors.primary,
+            disabledForegroundColor: const Color(0xFF94A3B8),
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.md,
               vertical: AppSpacing.sm,
@@ -171,7 +197,7 @@ class AppButton extends StatelessWidget {
               borderRadius: AppRadius.borderMd,
             ),
           ),
-          onPressed: isLoading ? null : onPressed,
+          onPressed: isEnabled ? onPressed : null,
           child: content,
         );
         break;
