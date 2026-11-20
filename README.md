@@ -4,6 +4,22 @@ Aplikasi mobile E-Learning berbasis **Flutter** yang dibangun untuk memenuhi **T
 
 ---
 
+## 📱 Download APK Release
+
+File APK release siap pasang telah di-build dan disimpan di direktori `docs/apk/`:
+
+- **File APK:** [app-release.apk](docs/apk/app-release.apk)
+- **Ukuran File:** ~52.7 MB
+- **Target OS:** Android 5.0 (API level 21) ke atas (mendukung arsitektur `arm64-v8a`, `armeabi-v7a`, dan `x86_64`)
+- **Tipe Build:** Release (Signed, siap dipasang langsung pada perangkat Android fisik maupun emulator)
+
+### Cara Memasang APK di Perangkat Android:
+1. **Unduh / Salin APK:** Salin berkas [`docs/apk/app-release.apk`](docs/apk/app-release.apk) ke penyimpanan perangkat Android Anda.
+2. **Aktifkan Izin:** Jika diminta oleh sistem Android, aktifkan izin *"Install unknown apps"* (Pasang aplikasi dari sumber tidak dikenal) untuk File Manager atau Browser Anda.
+3. **Instal & Jalankan:** Ketuk berkas `app-release.apk`, pilih **Install**, dan aplikasi langsung siap digunakan.
+
+---
+
 ## Fitur Utama (Sesuai Kriteria Assessment)
 
 | Fitur                      | Status     | Deskripsi Implementasi                                                                                                                                                                                               |
@@ -90,7 +106,7 @@ flutter run
 
 ### 3. Menjalankan Pengujian (Automated Tests)
 
-Seluruh 43 pengujian unit model, repository, notifier, komponen design system, breakpoint responsif, serta screen widget test telah disiapkan dengan tingkat kelulusan 100%:
+Seluruh 48 pengujian unit model, data source, repository, notifier, komponen design system, breakpoint responsif, serta screen widget test telah disiapkan dengan tingkat kelulusan 100%:
 
 ```bash
 # Menjalankan seluruh test suite
@@ -98,6 +114,16 @@ flutter test
 
 # Menjalankan analisis kode (linter)
 flutter analyze
+```
+
+### 4. Melakukan Build Release APK Sendiri
+
+```bash
+# Menghasilkan APK Release yang dioptimasi
+flutter build apk --release
+
+# Lokasi output build default:
+# build/app/outputs/flutter-apk/app-release.apk
 ```
 
 ---
