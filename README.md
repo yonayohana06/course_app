@@ -15,6 +15,7 @@ Aplikasi mobile E-Learning berbasis **Flutter** yang dibangun untuk memenuhi **T
 | **Player Controls**        | ✅ Selesai | Mendukung Play, Pause, Scrubbing/Seek bar, Mundur/Maju 10 detik, Fullscreen, indikator Buffering, dan tombol Coba Lagi (_Retry_) jika terjadi error.                                                                 |
 | **Navigation & Lifecycle** | ✅ Selesai | Pengguna dapat kembali ke daftar kursus atau memilih materi lain. **Controller video di-pause dan di-dispose secara aman** saat keluar halaman atau berganti materi untuk mencegah kebocoran memori (_memory leak_). |
 | **State Handling**         | ✅ Selesai | Menangani 4 kondisi antarmuka secara elegan: **Loading** (Shimmer/Spinner), **Empty State** (Tampilan kosong informatif), **Error State** (Pesan kesalahan + tombol Retry), dan **Data State**.                      |
+| **Responsive Design**      | ✅ Selesai | Adaptif untuk **Smartphone**, **Foldable (Samsung Z Fold / Surface Duo)**, dan **Tablet / iPad** dengan layout grid 2-3 kolom dan split-view side-by-side. |
 
 ---
 
@@ -89,7 +90,7 @@ flutter run
 
 ### 3. Menjalankan Pengujian (Automated Tests)
 
-Seluruh 36 pengujian unit model, repository, notifier, komponen design system, serta screen widget test telah disiapkan dengan tingkat kelulusan 100%:
+Seluruh 43 pengujian unit model, repository, notifier, komponen design system, breakpoint responsif, serta screen widget test telah disiapkan dengan tingkat kelulusan 100%:
 
 ```bash
 # Menjalankan seluruh test suite

@@ -4,8 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import '../../../../core/design_system/design_system.dart';
+import '../../../course/domain/entities/lesson.dart';
 import '../../../course/presentation/widgets/error_state_view.dart';
+import '../../domain/entities/player_state.dart';
 import '../controllers/lesson_player_controller.dart';
+import '../widgets/lesson_playlist_panel.dart';
 import '../widgets/lesson_playlist_sheet.dart';
 
 class LessonPlayerScreen extends ConsumerStatefulWidget {
@@ -132,6 +135,8 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
       }
     });
 
+    final bool isCompact = context.isCompact;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -151,6 +156,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           },
         ),
         actions: [
+          // Show playlist action button (especially convenient on mobile)
           if (lessonAsync.value?.course != null)
             IconButton(
               icon: const Icon(Icons.playlist_play_rounded),
@@ -197,165 +203,242 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             });
           }
 
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Video Player Viewport
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Container(
-                    color: Colors.black,
-                    child: _videoError != null
-                        ? Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(AppSpacing.base),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.error_outline_rounded,
-                                    color: AppColors.error,
-                                    size: 36,
-                                  ),
-                                  AppSpacing.verticalSm,
-                                  Text(
-                                    _videoError!,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  AppSpacing.verticalMd,
-                                  AppButton(
-                                    label: 'Coba Lagi',
-                                    icon: Icons.refresh_rounded,
-                                    onPressed: () =>
-                                        _initializePlayer(lesson.videoUrl),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : _isInitializingVideo || _chewieController == null
-                            ? const Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircularProgressIndicator(
-                                      color: Colors.white,
-                                    ),
-                                    AppSpacing.verticalMd,
-                                    Text(
-                                      'Menyiapkan pemutar video...',
-                                      style: TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Chewie(
-                                controller: _chewieController!,
-                              ),
+          if (isCompact) {
+            return _buildCompactLayout(lesson, playerState);
+          }
+
+          return _buildWideLayout(lesson, playerState);
+        },
+      ),
+    );
+  }
+
+  /// Single-column layout optimized for mobile screens (< 600 dp)
+  Widget _buildCompactLayout(Lesson lesson, LessonPlayerState playerState) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildVideoViewport(lesson),
+          Padding(
+            padding: AppSpacing.paddingCard,
+            child: _buildLessonDetails(lesson, playerState),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Two-column layout for tablets and unfolded foldable screens (>= 600 dp)
+  Widget _buildWideLayout(Lesson lesson, LessonPlayerState playerState) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: AppBreakpoints.maxContentWidth,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.responsiveValue<double>(
+              compact: AppSpacing.base,
+              medium: AppSpacing.xl,
+              expanded: AppSpacing.xxl,
+            ),
+            vertical: AppSpacing.base,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Left Column: Video player viewport & lesson info (flex 65)
+              Expanded(
+                flex: 65,
+                child: SingleChildScrollView(
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadius.borderLg,
+                      side: BorderSide(color: AppColors.borderLight),
+                    ),
+                    elevation: 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildVideoViewport(lesson),
+                        Padding(
+                          padding: AppSpacing.paddingCard,
+                          child: _buildLessonDetails(lesson, playerState),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+              ),
 
-                // Lesson info and switcher controls
-                Padding(
-                  padding: AppSpacing.paddingCard,
+              AppSpacing.horizontalBase,
+
+              // Right Column: In-place Lesson Playlist Sidebar (flex 35)
+              if (playerState.course != null)
+                Expanded(
+                  flex: 35,
+                  child: SingleChildScrollView(
+                    child: LessonPlaylistPanel(
+                      lessons: playerState.course!.lessons,
+                      activeLessonId: widget.lessonId,
+                      onSelectLesson: (selected) {
+                        _navigateToLesson(selected.id);
+                      },
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVideoViewport(Lesson lesson) {
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Container(
+        color: Colors.black,
+        child: _videoError != null
+            ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.base),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Order & Duration Row
-                      Row(
-                        children: [
-                          AppBadge(
-                            label: 'Materi #${lesson.order}',
-                            backgroundColor:
-                                AppColors.primary.withValues(alpha: 0.1),
-                            textColor: AppColors.primary,
-                            borderRadius: AppRadius.borderSm,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.sm,
-                              vertical: AppSpacing.xxs,
-                            ),
-                          ),
-                          AppSpacing.horizontalSm,
-                          const Icon(
-                            Icons.access_time_rounded,
-                            size: 14,
-                            color: AppColors.textSecondaryLight,
-                          ),
-                          AppSpacing.horizontalXxs,
-                          Text(
-                            lesson.duration,
-                            style: AppTypography.labelSmall,
-                          ),
-                        ],
+                      const Icon(
+                        Icons.error_outline_rounded,
+                        color: AppColors.error,
+                        size: 36,
                       ),
                       AppSpacing.verticalSm,
                       Text(
-                        lesson.title,
-                        style: AppTypography.heading2.copyWith(fontSize: 18),
+                        _videoError!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
                       ),
-                      AppSpacing.verticalBase,
-
-                      // Next / Previous navigation buttons
-                      Row(
-                        children: [
-                          Expanded(
-                            child: AppButton.outline(
-                              icon: Icons.skip_previous_rounded,
-                              label: 'Sebelumnya',
-                              onPressed: playerState.hasPreviousLesson
-                                  ? () {
-                                      _navigateToLesson(
-                                          playerState.previousLesson!.id);
-                                    }
-                                  : null,
-                            ),
-                          ),
-                          AppSpacing.horizontalMd,
-                          Expanded(
-                            child: AppButton(
-                              icon: Icons.skip_next_rounded,
-                              label: 'Berikutnya',
-                              onPressed: playerState.hasNextLesson
-                                  ? () {
-                                      _navigateToLesson(
-                                          playerState.nextLesson!.id);
-                                    }
-                                  : null,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      AppSpacing.verticalLg,
-                      const Divider(color: AppColors.borderLight),
                       AppSpacing.verticalMd,
-
-                      // Summary
-                      const Text(
-                        'Ringkasan Materi',
-                        style: AppTypography.heading3,
-                      ),
-                      AppSpacing.verticalSm,
-                      Text(
-                        lesson.summary,
-                        style: AppTypography.bodyMedium.copyWith(height: 1.5),
+                      AppButton(
+                        label: 'Coba Lagi',
+                        icon: Icons.refresh_rounded,
+                        onPressed: () => _initializePlayer(lesson.videoUrl),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          );
-        },
+              )
+            : _isInitializingVideo || _chewieController == null
+                ? const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                        AppSpacing.verticalMd,
+                        Text(
+                          'Menyiapkan pemutar video...',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Chewie(
+                    controller: _chewieController!,
+                  ),
       ),
+    );
+  }
+
+  Widget _buildLessonDetails(Lesson lesson, LessonPlayerState playerState) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Order & Duration Row
+        Row(
+          children: [
+            AppBadge(
+              label: 'Materi #${lesson.order}',
+              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
+              textColor: AppColors.primary,
+              borderRadius: AppRadius.borderSm,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xxs,
+              ),
+            ),
+            AppSpacing.horizontalSm,
+            const Icon(
+              Icons.access_time_rounded,
+              size: 14,
+              color: AppColors.textSecondaryLight,
+            ),
+            AppSpacing.horizontalXxs,
+            Text(
+              lesson.duration,
+              style: AppTypography.labelSmall,
+            ),
+          ],
+        ),
+        AppSpacing.verticalSm,
+        Text(
+          lesson.title,
+          style: AppTypography.heading2.copyWith(fontSize: 18),
+        ),
+        AppSpacing.verticalBase,
+
+        // Next / Previous navigation buttons
+        Row(
+          children: [
+            Expanded(
+              child: AppButton.outline(
+                icon: Icons.skip_previous_rounded,
+                label: 'Sebelumnya',
+                onPressed: playerState.hasPreviousLesson
+                    ? () {
+                        _navigateToLesson(playerState.previousLesson!.id);
+                      }
+                    : null,
+              ),
+            ),
+            AppSpacing.horizontalMd,
+            Expanded(
+              child: AppButton(
+                icon: Icons.skip_next_rounded,
+                label: 'Berikutnya',
+                onPressed: playerState.hasNextLesson
+                    ? () {
+                        _navigateToLesson(playerState.nextLesson!.id);
+                      }
+                    : null,
+              ),
+            ),
+          ],
+        ),
+
+        AppSpacing.verticalLg,
+        const Divider(color: AppColors.borderLight),
+        AppSpacing.verticalMd,
+
+        // Summary
+        const Text(
+          'Ringkasan Materi',
+          style: AppTypography.heading3,
+        ),
+        AppSpacing.verticalSm,
+        Text(
+          lesson.summary,
+          style: AppTypography.bodyMedium.copyWith(height: 1.5),
+        ),
+      ],
     );
   }
 }

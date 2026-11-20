@@ -305,3 +305,38 @@ lib/core/design_system/
 1. **Single Source of Truth:** Semua padding, margin, radius sudut, warna teks/permukaan didefinisikan secara tersentralisasi pada token. Perubahan estetika aplikasi dapat dilakukan pada level token tanpa menyentuh ratusan baris kode widget.
 2. **Material UI Decoupled Compatibility:** Menggunakan `package:material_ui/material_ui.dart` yang kompatibel penuh dengan Flutter 3.50+.
 3. **High Accessibility & Reusability:** Komponen seperti `AppButton` dan `AppBadge` menangani status loading, disabilitas, dan kontras warna secara otomatis.
+
+
+---
+
+## 9. Responsive & Adaptive Design (`Foldable & Tablet Support`)
+
+Aplikasi dirancang secara adaptif dan responsif mengikuti standar pedoman **Material 3 Adaptive Layout Guidelines**, sehingga dapat berjalan mulus pada smartphone standar, perangkat lipat (*foldables* seperti Samsung Galaxy Z Fold / Surface Duo), maupun tablet (*iPad / Android Tablet*).
+
+### 9.1 Skala Breakpoint (`AppBreakpoints`)
+
+| Breakpoint Tier | Rentang Lebar Layar | Target Perangkat | Layout Perilaku |
+|---|---|---|---|
+| **Compact** | `< 600 dp` | Smartphone biasa, cover screen Samsung Z Fold | Single-column list, bottom modal playlist, aspect ratio penuh. |
+| **Medium** | `600 - 839 dp` | Layar dalam Samsung Z Fold (unfolded), iPad Mini, Surface Duo | **2-Column Grid** pada katalog, **2-Column Split View** pada detail kursus dan video player. |
+| **Expanded** | `≥ 840 dp` | Tablet standar (iPad 10.2, iPad Pro), Tablet Landscape | **3-Column Grid** pada katalog, split layout lapang dengan pembatas `maxContentWidth` (1200 dp). |
+
+### 9.2 Implementasi Adaptif Antar Halaman
+
+1. **Course List Screen:**
+   - *Compact (< 600 dp):* Menggunakan `ListView` satu kolom dengan kartu kursus vertikal.
+   - *Medium (600 - 839 dp):* Menggunakan `GridView` 2 kolom.
+   - *Expanded (≥ 840 dp):* Menggunakan `GridView` 3 kolom berjarak proporsional.
+   - Kolom pencarian dan filter kategori dibatasi lebar maksimum 1200 dp agar tidak melebar berlebihan di tablet ultra-wide.
+
+2. **Course Detail Screen:**
+   - *Compact (< 600 dp):* Tata letak bertumpuk vertikal (*Header → Deskripsi → Daftar Lesson*).
+   - *Medium & Expanded (≥ 600 dp):* **Two-Column Split Layout**:
+     - *Kolom Kiri (Flex 6):* Thumbnail kursus, badge kategori/rating, deskripsi instruktur, dan rincian kursus.
+     - *Kolom Kanan (Flex 4):* Panel daftar lesson yang mandiri dan terstruktur.
+
+3. **Lesson Player Screen:**
+   - *Compact (< 600 dp):* Video player di atas, ringkasan materi di bawah, daftar playlist diakses via bottom sheet.
+   - *Medium & Expanded (≥ 600 dp):* **Side-by-Side Video & Playlist View**:
+     - *Kolom Kiri (Flex 65):* Pemutar video resolusi tinggi, kontrol navigasi Sebelumnya/Berikutnya, dan ringkasan materi.
+     - *Kolom Kanan (Flex 35):* Panel playlist materi terpasang langsung di layar (*in-place sidebar*), menampilkan indikator materi aktif dan memungkinkan pergantian materi secara instan tanpa perlu membuka modal.

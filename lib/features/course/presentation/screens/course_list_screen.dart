@@ -86,112 +86,149 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
             ...{for (final c in allCourses) c.category},
           ];
 
-          return Column(
-            children: [
-              // Search bar with Design System Component
-              AppSearchField(
-                controller: _searchController,
-                hintText: 'Cari kursus atau instruktur...',
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.base,
-                  AppSpacing.sm,
-                  AppSpacing.base,
-                  AppSpacing.sm,
-                ),
-                onChanged: (val) {
-                  ref.read(searchQueryProvider.notifier).setQuery(val);
-                },
-                onClear: () {
-                  ref.read(searchQueryProvider.notifier).setQuery('');
-                },
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppBreakpoints.maxContentWidth,
               ),
-
-              // Category chips with AppBadge
-              SizedBox(
-                height: 38,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.base,
+              child: Column(
+                children: [
+                  // Search bar with Design System Component
+                  AppSearchField(
+                    controller: _searchController,
+                    hintText: 'Cari kursus atau instruktur...',
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.base,
+                      AppSpacing.sm,
+                      AppSpacing.base,
+                      AppSpacing.sm,
+                    ),
+                    onChanged: (val) {
+                      ref.read(searchQueryProvider.notifier).setQuery(val);
+                    },
+                    onClear: () {
+                      ref.read(searchQueryProvider.notifier).setQuery('');
+                    },
                   ),
-                  itemCount: categories.length,
-                  separatorBuilder: (context, index) =>
-                      AppSpacing.horizontalSm,
-                  itemBuilder: (context, index) {
-                    final cat = categories[index];
-                    final isSelected = cat == selectedCategory;
-                    return AppBadge.category(
-                      label: cat,
-                      isSelected: isSelected,
-                      onTap: () {
-                        ref
-                            .read(selectedCategoryProvider.notifier)
-                            .setCategory(cat);
-                      },
-                    );
-                  },
-                ),
-              ),
 
-              AppSpacing.verticalSm,
-
-              // Filtered list or empty filter message
-              Expanded(
-                child: filteredCoursesAsync.when(
-                  loading: () => const AppLoadingIndicator(),
-                  error: (err, _) => ErrorStateView(
-                    message: err.toString(),
-                    onRetry: () => ref
-                        .read(courseListControllerProvider.notifier)
-                        .refresh(),
-                  ),
-                  data: (filteredList) {
-                    if (filteredList.isEmpty) {
-                      return EmptyStateView(
-                        title: 'Tidak ada kursus yang cocok',
-                        message:
-                            'Coba ubah kata kunci pencarian atau kategori filter.',
-                        icon: Icons.search_off_rounded,
-                        onAction: () {
-                          ref
-                              .read(selectedCategoryProvider.notifier)
-                              .setCategory('Semua');
-                          ref.read(searchQueryProvider.notifier).setQuery('');
-                          _searchController.clear();
-                        },
-                        actionLabel: 'Reset Filter',
-                      );
-                    }
-
-                    return RefreshIndicator(
-                      onRefresh: () => ref
-                          .read(courseListControllerProvider.notifier)
-                          .refresh(),
-                      child: ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(
-                          AppSpacing.base,
-                          AppSpacing.sm,
-                          AppSpacing.base,
-                          AppSpacing.xl,
-                        ),
-                        itemCount: filteredList.length,
-                        separatorBuilder: (context, index) =>
-                            AppSpacing.verticalBase,
-                        itemBuilder: (context, index) {
-                          final course = filteredList[index];
-                          return CourseCard(
-                            course: course,
-                            onTap: () {
-                              context.go('/courses/${course.id}');
-                            },
-                          );
-                        },
+                  // Category chips with AppBadge
+                  SizedBox(
+                    height: 38,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.base,
                       ),
-                    );
-                  },
-                ),
+                      itemCount: categories.length,
+                      separatorBuilder: (context, index) =>
+                          AppSpacing.horizontalSm,
+                      itemBuilder: (context, index) {
+                        final cat = categories[index];
+                        final isSelected = cat == selectedCategory;
+                        return AppBadge.category(
+                          label: cat,
+                          isSelected: isSelected,
+                          onTap: () {
+                            ref
+                                .read(selectedCategoryProvider.notifier)
+                                .setCategory(cat);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+
+                  AppSpacing.verticalSm,
+
+                  // Filtered list or empty filter message
+                  Expanded(
+                    child: filteredCoursesAsync.when(
+                      loading: () => const AppLoadingIndicator(),
+                      error: (err, _) => ErrorStateView(
+                        message: err.toString(),
+                        onRetry: () => ref
+                            .read(courseListControllerProvider.notifier)
+                            .refresh(),
+                      ),
+                      data: (filteredList) {
+                        if (filteredList.isEmpty) {
+                          return EmptyStateView(
+                            title: 'Tidak ada kursus yang cocok',
+                            message:
+                                'Coba ubah kata kunci pencarian atau kategori filter.',
+                            icon: Icons.search_off_rounded,
+                            onAction: () {
+                              ref
+                                  .read(selectedCategoryProvider.notifier)
+                                  .setCategory('Semua');
+                              ref
+                                  .read(searchQueryProvider.notifier)
+                                  .setQuery('');
+                              _searchController.clear();
+                            },
+                            actionLabel: 'Reset Filter',
+                          );
+                        }
+
+                        final bool isCompact = context.isCompact;
+
+                        return RefreshIndicator(
+                          onRefresh: () => ref
+                              .read(courseListControllerProvider.notifier)
+                              .refresh(),
+                          child: isCompact
+                              ? ListView.separated(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    AppSpacing.base,
+                                    AppSpacing.sm,
+                                    AppSpacing.base,
+                                    AppSpacing.xl,
+                                  ),
+                                  itemCount: filteredList.length,
+                                  separatorBuilder: (context, index) =>
+                                      AppSpacing.verticalBase,
+                                  itemBuilder: (context, index) {
+                                    final course = filteredList[index];
+                                    return CourseCard(
+                                      course: course,
+                                      onTap: () {
+                                        context.go('/courses/${course.id}');
+                                      },
+                                    );
+                                  },
+                                )
+                              : GridView.builder(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    AppSpacing.base,
+                                    AppSpacing.sm,
+                                    AppSpacing.base,
+                                    AppSpacing.xl,
+                                  ),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: context.courseGridColumns,
+                                    crossAxisSpacing: AppSpacing.base,
+                                    mainAxisSpacing: AppSpacing.base,
+                                    mainAxisExtent: 390,
+                                  ),
+                                  itemCount: filteredList.length,
+                                  itemBuilder: (context, index) {
+                                    final course = filteredList[index];
+                                    return CourseCard(
+                                      course: course,
+                                      onTap: () {
+                                        context.go('/courses/${course.id}');
+                                      },
+                                    );
+                                  },
+                                ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           );
         },
       ),
