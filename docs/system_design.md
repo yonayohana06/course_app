@@ -13,29 +13,27 @@ Aplikasi dibangun menggunakan pendekatan **Feature-First Clean Architecture**. S
 ```mermaid
 flowchart TD
     subgraph Presentation Layer
-        UI["Screens & Widgets<br/>- CourseListScreen<br/>- CourseDetailScreen<br/>- LessonPlayerScreen"]
-        Notifier["Riverpod Notifiers & Providers<br/>- courseListControllerProvider<br/>- courseDetailProvider<br/>- lessonPlayerControllerProvider"]
+        Notifier["Riverpod Notifiers<br/>- courseListControllerProvider"]
     end
 
     subgraph Domain Layer
-        Entities["Pure Entities<br/>- Course<br/>- Lesson<br/>- Instructor"]
+        Entities["Pure Entities<br/>- Course, Lesson"]
         Contract["Repository Contract<br/>- CourseRepository interface"]
     end
 
     subgraph Data Layer
         RepoImpl["Repository Implementation<br/>- CourseRepositoryImpl"]
-        DataSource["Data Sources<br/>- LocalCourseDataSource / RemoteCourseDataSource"]
-        Models["Data Models & DTOs<br/>- CourseModel<br/>- LessonModel<br/>- InstructorModel"]
+        DataSource["Data Sources<br/>- Local / RemoteDataSource"]
+        Models["Data Models & DTOs<br/>- CourseModel, LessonModel"]
     end
 
-    UI -->|User Interactions / Watch State| Notifier
-    Notifier -->|Calls| Contract
+    Notifier -->|1. Calls| Contract
     RepoImpl -.->|Implements| Contract
-    RepoImpl -->|Queries| DataSource
-    DataSource -->|Parses JSON| Models
-    Models -->|Maps to / Extends| Entities
-    RepoImpl -->|Returns Entities| Notifier
-    Notifier -->|AsyncValue State| UI
+    RepoImpl -->|2. Queries| DataSource
+    DataSource -->|3. Parses JSON & Returns| Models
+    Models -.->|Used by| RepoImpl
+    RepoImpl -->|4. Converts to & Returns| Entities
+    Entities -->|5. Received by| Notifier
 ```
 
 <p align="center">
@@ -88,6 +86,10 @@ erDiagram
     }
 ```
 
+<p align="center">
+  <img src="images/diagram-erd.svg" alt="Diagram ERD" width="90%" />
+</p>
+
 ---
 
 ## 3. Flowchart Alur Navigasi & Pemutaran Video
@@ -123,6 +125,10 @@ flowchart TD
     NextPrev -->|Ganti Lesson| DisposeOld[Pause & Dispose Controller Lama] --> InitVideo
     NextPrev -->|Kembali / Tutup Halaman| DisposeAll[Pause & Dispose Controller] --> CourseDetail
 ```
+
+<p align="center">
+  <img src="images/diagram-flow.svg" alt="Diagram Flow" width="90%" />
+</p>
 
 ---
 
@@ -171,6 +177,10 @@ sequenceDiagram
     UI->>Player: pause() & dispose()
     UI-->>User: Kembali ke Detail Kursus tanpa sisa proses background
 ```
+
+<p align="center">
+  <img src="images/diagram-sequence.svg" alt="Diagram Sequence" width="90%" />
+</p>
 
 ---
 
