@@ -101,9 +101,12 @@ flowchart TD
     FetchCourses -->|Error / Offline| Error1[Tampilkan ErrorStateView + Tombol Retry]
     Error1 -->|Tap Retry| FetchCourses
     FetchCourses -->|Data Kosong| Empty1[Tampilkan EmptyStateView]
+    Empty1 -->|Tap Refresh / Reset Filter| FetchCourses
     FetchCourses -->|Sukses| DisplayCourses[Tampilkan Daftar Kartu Course]
 
     DisplayCourses --> SearchFilter[Filter Kategori / Cari Judul]
+    SearchFilter -->|Ada Hasil| DisplayCourses
+    SearchFilter -->|Tidak Ditemukan| Empty1
     DisplayCourses -->|Pilih Course| CourseDetail[Halaman Detail Course]
 
     CourseDetail --> DisplayLessons[Tampilkan Info Kursus & List Lesson]
@@ -131,10 +134,19 @@ Diagram ini memperlihatkan alur pembuatan, pemutaran, pergantian materi (_switch
 sequenceDiagram
     autonumber
     actor User as Pengguna (Student)
-    participant UI as LessonPlayerScreen
-    participant Controller as LessonPlayerNotifier
-    participant Repo as CourseRepository
-    participant Player as VideoPlayer / ChewieController
+
+    box rgb(227, 242, 253) Presentation Layer
+        participant UI as LessonPlayerScreen
+        participant Controller as LessonPlayerNotifier
+    end
+
+    box rgb(232, 245, 233) Domain Layer
+        participant Repo as CourseRepository
+    end
+
+    box rgb(255, 243, 224) Media / Platform
+        participant Player as VideoPlayer / ChewieController
+    end
 
     User->>UI: Buka halaman video lesson
     UI->>Controller: loadLesson(courseId, lessonId)
@@ -306,37 +318,36 @@ lib/core/design_system/
 2. **Material UI Decoupled Compatibility:** Menggunakan `package:material_ui/material_ui.dart` yang kompatibel penuh dengan Flutter 3.50+.
 3. **High Accessibility & Reusability:** Komponen seperti `AppButton` dan `AppBadge` menangani status loading, disabilitas, dan kontras warna secara otomatis.
 
-
 ---
 
 ## 9. Responsive & Adaptive Design (`Foldable & Tablet Support`)
 
-Aplikasi dirancang secara adaptif dan responsif mengikuti standar pedoman **Material 3 Adaptive Layout Guidelines**, sehingga dapat berjalan mulus pada smartphone standar, perangkat lipat (*foldables* seperti Samsung Galaxy Z Fold / Surface Duo), maupun tablet (*iPad / Android Tablet*).
+Aplikasi dirancang secara adaptif dan responsif mengikuti standar pedoman **Material 3 Adaptive Layout Guidelines**, sehingga dapat berjalan mulus pada smartphone standar, perangkat lipat (_foldables_ seperti Samsung Galaxy Z Fold / Surface Duo), maupun tablet (_iPad / Android Tablet_).
 
 ### 9.1 Skala Breakpoint (`AppBreakpoints`)
 
-| Breakpoint Tier | Rentang Lebar Layar | Target Perangkat | Layout Perilaku |
-|---|---|---|---|
-| **Compact** | `< 600 dp` | Smartphone biasa, cover screen Samsung Z Fold | Single-column list, bottom modal playlist, aspect ratio penuh. |
-| **Medium** | `600 - 839 dp` | Layar dalam Samsung Z Fold (unfolded), iPad Mini, Surface Duo | **2-Column Grid** pada katalog, **2-Column Split View** pada detail kursus dan video player. |
-| **Expanded** | `≥ 840 dp` | Tablet standar (iPad 10.2, iPad Pro), Tablet Landscape | **3-Column Grid** pada katalog, split layout lapang dengan pembatas `maxContentWidth` (1200 dp). |
+| Breakpoint Tier | Rentang Lebar Layar | Target Perangkat                                              | Layout Perilaku                                                                                  |
+| --------------- | ------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Compact**     | `< 600 dp`          | Smartphone biasa, cover screen Samsung Z Fold                 | Single-column list, bottom modal playlist, aspect ratio penuh.                                   |
+| **Medium**      | `600 - 839 dp`      | Layar dalam Samsung Z Fold (unfolded), iPad Mini, Surface Duo | **2-Column Grid** pada katalog, **2-Column Split View** pada detail kursus dan video player.     |
+| **Expanded**    | `≥ 840 dp`          | Tablet standar (iPad 10.2, iPad Pro), Tablet Landscape        | **3-Column Grid** pada katalog, split layout lapang dengan pembatas `maxContentWidth` (1200 dp). |
 
 ### 9.2 Implementasi Adaptif Antar Halaman
 
 1. **Course List Screen:**
-   - *Compact (< 600 dp):* Menggunakan `ListView` satu kolom dengan kartu kursus vertikal.
-   - *Medium (600 - 839 dp):* Menggunakan `GridView` 2 kolom.
-   - *Expanded (≥ 840 dp):* Menggunakan `GridView` 3 kolom berjarak proporsional.
+   - _Compact (< 600 dp):_ Menggunakan `ListView` satu kolom dengan kartu kursus vertikal.
+   - _Medium (600 - 839 dp):_ Menggunakan `GridView` 2 kolom.
+   - _Expanded (≥ 840 dp):_ Menggunakan `GridView` 3 kolom berjarak proporsional.
    - Kolom pencarian dan filter kategori dibatasi lebar maksimum 1200 dp agar tidak melebar berlebihan di tablet ultra-wide.
 
 2. **Course Detail Screen:**
-   - *Compact (< 600 dp):* Tata letak bertumpuk vertikal (*Header → Deskripsi → Daftar Lesson*).
-   - *Medium & Expanded (≥ 600 dp):* **Two-Column Split Layout**:
-     - *Kolom Kiri (Flex 6):* Thumbnail kursus, badge kategori/rating, deskripsi instruktur, dan rincian kursus.
-     - *Kolom Kanan (Flex 4):* Panel daftar lesson yang mandiri dan terstruktur.
+   - _Compact (< 600 dp):_ Tata letak bertumpuk vertikal (_Header → Deskripsi → Daftar Lesson_).
+   - _Medium & Expanded (≥ 600 dp):_ **Two-Column Split Layout**:
+     - _Kolom Kiri (Flex 6):_ Thumbnail kursus, badge kategori/rating, deskripsi instruktur, dan rincian kursus.
+     - _Kolom Kanan (Flex 4):_ Panel daftar lesson yang mandiri dan terstruktur.
 
 3. **Lesson Player Screen:**
-   - *Compact (< 600 dp):* Video player di atas, ringkasan materi di bawah, daftar playlist diakses via bottom sheet.
-   - *Medium & Expanded (≥ 600 dp):* **Side-by-Side Video & Playlist View**:
-     - *Kolom Kiri (Flex 65):* Pemutar video resolusi tinggi, kontrol navigasi Sebelumnya/Berikutnya, dan ringkasan materi.
-     - *Kolom Kanan (Flex 35):* Panel playlist materi terpasang langsung di layar (*in-place sidebar*), menampilkan indikator materi aktif dan memungkinkan pergantian materi secara instan tanpa perlu membuka modal.
+   - _Compact (< 600 dp):_ Video player di atas, ringkasan materi di bawah, daftar playlist diakses via bottom sheet.
+   - _Medium & Expanded (≥ 600 dp):_ **Side-by-Side Video & Playlist View**:
+     - _Kolom Kiri (Flex 65):_ Pemutar video resolusi tinggi, kontrol navigasi Sebelumnya/Berikutnya, dan ringkasan materi.
+     - _Kolom Kanan (Flex 35):_ Panel playlist materi terpasang langsung di layar (_in-place sidebar_), menampilkan indikator materi aktif dan memungkinkan pergantian materi secara instan tanpa perlu membuka modal.

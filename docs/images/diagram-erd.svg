@@ -1,0 +1,154 @@
+<svg class="dark " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728.67 306" width="728.67" height="306" id="md4d88c__root" data-diagram-type="er">
+  <style data-mercat-style="universal">.mercat text{font-family:'Google Sans',Roboto,Arial,sans-serif;fill:var(--m-text);dominant-baseline:central}.mercat .t-code{font-family:'Google Sans Mono','Roboto Mono',monospace}.mercat .m-node .m-shape{fill:var(--m-node-fill);stroke:var(--m-node-stroke);stroke-width:1.5px}.mercat .m-edge .m-path{fill:none;stroke:var(--m-line);stroke-width:1.5px}.mercat .m-edge-label .m-pill-bg,.mercat .m-edge-label .m-shape{fill:var(--m-pill-bg);stroke:var(--m-pill-border);stroke-width:1px}.mercat .m-edge-label .m-label{fill:var(--m-text-sec)}.mercat .t-label-strong{font-size:13px;font-weight:700}.mercat .t-edge{font-size:11px;font-weight:400}.mercat .t-code{font-size:11px;font-weight:400}.mercat .t-micro{font-size:8px;font-weight:600}</style>
+  <style data-mercat-style="theme-light">#md4d88c__root{--m-bg:#ffffff;--m-text:#1f1f1f;--m-text-sec:#797979;--m-line:#545454;--m-node-fill:#f8f9fa;--m-node-stroke:#747775;--m-group-hdr:#f4f4f4;--m-pill-bg:#fbfbfb;--m-pill-border:#d7d7d7;--m-key-badge:#e9e9e9}</style>
+  <style data-mercat-style="theme-dark">#md4d88c__root.dark{--m-bg:#1f1f1f;--m-text:#e3e3e3;--m-text-sec:#959595;--m-line:#bfbfbf;--m-node-fill:#2d2e30;--m-node-stroke:#8e918f;--m-group-hdr:#292929;--m-pill-bg:#232323;--m-pill-border:#424242;--m-key-badge:#333333}</style>
+  <style data-mercat-style="type">#md4d88c__root .m-node&gt;.m-shape{stroke-width:1px}#md4d88c__root .m-node .er-header{fill:var(--m-group-hdr);stroke:var(--m-node-stroke);stroke-width:1px}#md4d88c__root .m-node .er-divider{fill:none;stroke:var(--m-node-stroke);stroke-width:1px}#md4d88c__root .m-node .er-attr-type{fill:var(--m-text-sec)}#md4d88c__root .m-node .er-key-badge{fill:var(--m-key-badge);stroke:none}#md4d88c__root .m-node .er-key-badge-text{fill:var(--m-text)}</style>
+  <g class="mercat mercat-er" transform="translate(-35, -35)">
+    <defs>
+      <marker id="md4d88c__mk-only-one" refX="13.5" refY="4.8" markerWidth="13.5" markerHeight="9.6" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 4.8 L 13.5 4.8 M 10.5 0.8 L 10.5 8.8 M 7 0.8 L 7 8.8" class="m-marker" fill="none" stroke="var(--m-line)" stroke-width="1.25" stroke-linecap="round"/>
+      </marker>
+      <marker id="md4d88c__mk-zero-many" refX="20" refY="5" markerWidth="20" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 5 L 20 5 M 20 0.7 L 13 5 L 20 9.3" class="m-marker" fill="none" stroke="var(--m-line)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="8.9" cy="5" r="2.6" class="m-marker" fill="var(--m-bg)" stroke="var(--m-line)" stroke-width="1.25"/>
+      </marker>
+      <marker id="md4d88c__mk-one-many" refX="17.5" refY="5" markerWidth="17.5" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 5 L 17.5 5 M 17.5 0.7 L 10 5 L 17.5 9.3 M 7.5 0.8 L 7.5 9.2" class="m-marker" fill="none" stroke="var(--m-line)" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <g class="m-node m-node--rect" id="md4d88c__node__INSTRUCTOR" data-role="vertex">
+      <rect x="50" y="127" width="140" height="122" class="m-shape"/>
+      <rect x="50" y="127" width="140" height="34" class="m-shape er-header"/>
+      <line x1="50" y1="161" x2="190" y2="161" class="er-divider"/>
+      <text x="120" y="144" class="m-label t-label-strong" text-anchor="middle">INSTRUCTOR</text>
+      <g class="m-node m-field" id="md4d88c__field__INSTRUCTOR__id" data-role="member">
+        <rect x="56" y="165" width="19.12" height="14" rx="2" ry="2" class="er-key-badge"/>
+        <text x="65.56" y="172" class="m-label er-key-badge-text t-micro" text-anchor="middle">PK</text>
+        <text x="83.12" y="172" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="182" y="172" class="m-label er-attr-name t-code" text-anchor="end">id</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__INSTRUCTOR__name" data-role="member">
+        <text x="58" y="194" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="182" y="194" class="m-label er-attr-name t-code" text-anchor="end">name</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__INSTRUCTOR__role" data-role="member">
+        <text x="58" y="216" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="182" y="216" class="m-label er-attr-name t-code" text-anchor="end">role</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__INSTRUCTOR__avatarUrl" data-role="member">
+        <text x="58" y="238" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="182" y="238" class="m-label er-attr-name t-code" text-anchor="end">avatarUrl</text>
+      </g>
+    </g>
+    <g class="m-node m-node--rect" id="md4d88c__node__COURSE" data-role="vertex">
+      <rect x="310" y="50" width="171.67" height="276" class="m-shape"/>
+      <rect x="310" y="50" width="171.67" height="34" class="m-shape er-header"/>
+      <line x1="310" y1="84" x2="481.67" y2="84" class="er-divider"/>
+      <text x="395.83" y="67" class="m-label t-label-strong" text-anchor="middle">COURSE</text>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__id" data-role="member">
+        <rect x="316" y="88" width="19.12" height="14" rx="2" ry="2" class="er-key-badge"/>
+        <text x="325.56" y="95" class="m-label er-key-badge-text t-micro" text-anchor="middle">PK</text>
+        <text x="343.12" y="95" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="95" class="m-label er-attr-name t-code" text-anchor="end">id</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__instructorId" data-role="member">
+        <rect x="316" y="110" width="18.67" height="14" rx="2" ry="2" class="er-key-badge"/>
+        <text x="325.34" y="117" class="m-label er-key-badge-text t-micro" text-anchor="middle">FK</text>
+        <text x="342.67" y="117" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="117" class="m-label er-attr-name t-code" text-anchor="end">instructorId</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__title" data-role="member">
+        <text x="318" y="139" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="139" class="m-label er-attr-name t-code" text-anchor="end">title</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__tagline" data-role="member">
+        <text x="318" y="161" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="161" class="m-label er-attr-name t-code" text-anchor="end">tagline</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__description" data-role="member">
+        <text x="318" y="183" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="183" class="m-label er-attr-name t-code" text-anchor="end">description</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__thumbnailUrl" data-role="member">
+        <text x="318" y="205" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="205" class="m-label er-attr-name t-code" text-anchor="end">thumbnailUrl</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__category" data-role="member">
+        <text x="318" y="227" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="227" class="m-label er-attr-name t-code" text-anchor="end">category</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__level" data-role="member">
+        <text x="318" y="249" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="249" class="m-label er-attr-name t-code" text-anchor="end">level</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__totalDuration" data-role="member">
+        <text x="318" y="271" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="473.67" y="271" class="m-label er-attr-name t-code" text-anchor="end">totalDuration</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__rating" data-role="member">
+        <text x="318" y="293" class="m-label er-attr-type t-code" text-anchor="start">double</text>
+        <text x="473.67" y="293" class="m-label er-attr-name t-code" text-anchor="end">rating</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__COURSE__lessonsCount" data-role="member">
+        <text x="318" y="315" class="m-label er-attr-type t-code" text-anchor="start">int</text>
+        <text x="473.67" y="315" class="m-label er-attr-name t-code" text-anchor="end">lessonsCount</text>
+      </g>
+    </g>
+    <g class="m-node m-node--rect" id="md4d88c__node__LESSON" data-role="vertex">
+      <rect x="601.67" y="83" width="147" height="210" class="m-shape"/>
+      <rect x="601.67" y="83" width="147" height="34" class="m-shape er-header"/>
+      <line x1="601.67" y1="117" x2="748.67" y2="117" class="er-divider"/>
+      <text x="675.17" y="100" class="m-label t-label-strong" text-anchor="middle">LESSON</text>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__id" data-role="member">
+        <rect x="607.67" y="121" width="19.12" height="14" rx="2" ry="2" class="er-key-badge"/>
+        <text x="617.23" y="128" class="m-label er-key-badge-text t-micro" text-anchor="middle">PK</text>
+        <text x="634.79" y="128" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="128" class="m-label er-attr-name t-code" text-anchor="end">id</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__courseId" data-role="member">
+        <rect x="607.67" y="143" width="18.67" height="14" rx="2" ry="2" class="er-key-badge"/>
+        <text x="617.01" y="150" class="m-label er-key-badge-text t-micro" text-anchor="middle">FK</text>
+        <text x="634.34" y="150" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="150" class="m-label er-attr-name t-code" text-anchor="end">courseId</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__order" data-role="member">
+        <text x="609.67" y="172" class="m-label er-attr-type t-code" text-anchor="start">int</text>
+        <text x="740.67" y="172" class="m-label er-attr-name t-code" text-anchor="end">order</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__title" data-role="member">
+        <text x="609.67" y="194" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="194" class="m-label er-attr-name t-code" text-anchor="end">title</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__duration" data-role="member">
+        <text x="609.67" y="216" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="216" class="m-label er-attr-name t-code" text-anchor="end">duration</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__durationSeconds" data-role="member">
+        <text x="609.67" y="238" class="m-label er-attr-type t-code" text-anchor="start">int</text>
+        <text x="740.67" y="238" class="m-label er-attr-name t-code" text-anchor="end">durationSeconds</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__videoUrl" data-role="member">
+        <text x="609.67" y="260" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="260" class="m-label er-attr-name t-code" text-anchor="end">videoUrl</text>
+      </g>
+      <g class="m-node m-field" id="md4d88c__field__LESSON__summary" data-role="member">
+        <text x="609.67" y="282" class="m-label er-attr-type t-code" text-anchor="start">string</text>
+        <text x="740.67" y="282" class="m-label er-attr-name t-code" text-anchor="end">summary</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="md4d88c__edge__INSTRUCTOR__COURSE__0" data-role="connector">
+      <path d="M 190 205 L 310 205" class="m-path" marker-start="url(#md4d88c__mk-only-one)" marker-end="url(#md4d88c__mk-zero-many)"/>
+      <g class="m-edge-label">
+        <rect x="225.79" y="193.85" width="48.42" height="22.3" rx="2" ry="2" class="m-pill-bg"/>
+        <text x="250" y="205" class="m-label t-edge" text-anchor="middle">teaches</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="md4d88c__edge__COURSE__LESSON__0" data-role="connector">
+      <path d="M 481.67 205 L 601.67 205" class="m-path" marker-start="url(#md4d88c__mk-only-one)" marker-end="url(#md4d88c__mk-one-many)"/>
+      <g class="m-edge-label">
+        <rect x="515.97" y="193.85" width="51.41" height="22.3" rx="2" ry="2" class="m-pill-bg"/>
+        <text x="541.67" y="205" class="m-label t-edge" text-anchor="middle">contains</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,227 @@
+<svg class="dark " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1307.66 1563.73" width="1307.66" height="1563.73" id="mcf375f__root" data-diagram-type="flowchart">
+  <style data-mercat-style="universal">.mercat text{font-family:'Google Sans',Roboto,Arial,sans-serif;fill:var(--m-text);dominant-baseline:central}.mercat .m-node .m-shape{fill:var(--m-node-fill);stroke:var(--m-node-stroke);stroke-width:1.5px}.mercat .m-edge .m-path{fill:none;stroke:var(--m-line);stroke-width:1.5px}.mercat .m-edge-label .m-pill-bg,.mercat .m-edge-label .m-shape{fill:var(--m-pill-bg);stroke:var(--m-pill-border);stroke-width:1px}.mercat .m-edge-label .m-label{fill:var(--m-text-sec)}.mercat .t-label{font-size:13px;font-weight:500}.mercat .t-edge{font-size:11px;font-weight:400}</style>
+  <style data-mercat-style="theme-light">#mcf375f__root{--m-text:#1f1f1f;--m-text-sec:#797979;--m-line:#545454;--m-node-fill:#f8f9fa;--m-node-stroke:#747775;--m-pill-bg:#fbfbfb;--m-pill-border:#d7d7d7}</style>
+  <style data-mercat-style="theme-dark">#mcf375f__root.dark{--m-text:#e3e3e3;--m-text-sec:#959595;--m-line:#bfbfbf;--m-node-fill:#2d2e30;--m-node-stroke:#8e918f;--m-pill-bg:#232323;--m-pill-border:#424242}</style>
+  <g class="mercat mercat-flowchart" transform="translate(47.94, -35)">
+    <defs>
+      <marker id="mcf375f__mk-arrow" refX="9.45" refY="3.4" markerWidth="10.8" markerHeight="6.8" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 0 L 10.8 3.4 L 0 6.8 Z" class="m-marker" fill="var(--m-line)" stroke="none"/>
+      </marker>
+    </defs>
+    <g class="m-node m-edge" id="mcf375f__edge__Start__CourseList__0" data-role="connector">
+      <path d="M 511.27 86.9 L 511.27 145.55" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__CourseList__FetchCourses__0" data-role="connector">
+      <path d="M 511.27 183.8 L 511.27 242.45" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__FetchCourses__Spinner1__0" data-role="connector">
+      <path d="M 599.84 283.84 L 830.76 283.84 Q 836.76 283.84, 836.76 289.84 L 836.76 442.52" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__FetchCourses__Error1__0" data-role="connector">
+      <path d="M 481.74 310.53 L 481.74 442.52" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__Error1__FetchCourses__0" data-role="connector">
+      <path d="M 365.39 475.24 L 365.39 492.77 Q 365.39 498.77, 359.39 498.77 L 89.85 498.77 Q 83.85 498.77, 83.85 492.77 L 83.85 263.15 Q 83.85 257.15, 89.85 257.15 L 480.39 257.15" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__FetchCourses__Empty1__0" data-role="connector">
+      <path d="M 540.79 310.53 L 540.79 379.1 Q 540.79 385.1, 546.79 385.1 L 1015.38 385.1 Q 1021.38 385.1, 1021.38 391.1 L 1021.38 518.77 Q 1021.38 524.77, 1015.38 524.77 L 303.64 524.77 Q 297.64 524.77, 297.64 530.77 L 297.64 756.32" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__Empty1__FetchCourses__0" data-role="connector">
+      <path d="M 197.31 776.12 L -26.94 776.12 Q -32.94 776.12, -32.94 770.12 L -32.94 276.49 Q -32.94 270.49, -26.94 270.49 L 450.87 270.49" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__FetchCourses__DisplayCourses__0" data-role="connector">
+      <path d="M 466.98 303.85 L 220.62 303.85 Q 214.62 303.85, 214.62 309.85 L 214.62 442.52" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__DisplayCourses__SearchFilter__0" data-role="connector">
+      <path d="M 132.86 480.77 L 132.86 599.42" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__SearchFilter__DisplayCourses__0" data-role="connector">
+      <path d="M -12.94 619.22 L -26.94 619.22 Q -32.94 619.22, -32.94 613.22 L -32.94 468.32 Q -32.94 462.32, -26.94 462.32 L 102.5 462.32" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__SearchFilter__Empty1__0" data-role="connector">
+      <path d="M 84.02 637.67 L 84.02 699.67 Q 84.02 705.67, 90.02 705.67 L 262.2 705.67 Q 268.2 705.67, 268.2 711.67 L 268.2 756.32" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__DisplayCourses__CourseDetail__0" data-role="connector">
+      <path d="M 247.54 480.77 L 247.54 534.77 Q 247.54 540.77, 253.54 540.77 L 770.03 540.77 Q 776.03 540.77, 776.03 546.77 L 776.03 599.42" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__CourseDetail__DisplayLessons__0" data-role="connector">
+      <path d="M 776.03 637.67 L 776.03 756.32" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__DisplayLessons__LessonPlayer__0" data-role="connector">
+      <path d="M 776.03 794.57 L 776.03 913.22" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__LessonPlayer__InitVideo__0" data-role="connector">
+      <path d="M 776.03 951.47 L 776.03 1010.12" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__InitVideo__VideoSpinner__0" data-role="connector">
+      <path d="M 839.87 1036.21 L 1081.18 1036.21 Q 1087.18 1036.21, 1087.18 1042.21 L 1087.18 1229.07" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__InitVideo__VideoError__0" data-role="connector">
+      <path d="M 776.03 1110.42 L 776.03 1229.07" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__VideoError__InitVideo__0" data-role="connector">
+      <path d="M 909.63 1261.78 L 909.63 1279.32 Q 909.63 1285.32, 915.63 1285.32 L 1238.72 1285.32 Q 1244.72 1285.32, 1244.72 1279.32 L 1244.72 1091.68 Q 1244.72 1085.68, 1238.72 1085.68 L 841.22 1085.68" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__InitVideo__PlayVideo__0" data-role="connector">
+      <path d="M 712.2 1036.21 L 473.72 1036.21 Q 467.72 1036.21, 467.72 1042.21 L 467.72 1229.07" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__PlayVideo__Controls__0" data-role="connector">
+      <path d="M 426.81 1267.32 L 426.81 1357.27" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__PlayVideo__NextPrev__0" data-role="connector">
+      <path d="M 508.62 1267.32 L 508.62 1297.32 Q 508.62 1303.32, 514.62 1303.32 L 607.82 1303.32 Q 613.82 1303.32, 613.82 1309.32 L 613.82 1325.97" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__NextPrev__DisposeOld__0" data-role="connector">
+      <path d="M 485 1377.07 L 475 1377.07 Q 469 1377.07, 469 1383.07 L 469 1456.83 Q 469 1462.83, 475 1462.83 L 479 1462.83 Q 485 1462.83, 485 1468.83 L 485 1545.48" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__DisposeOld__InitVideo__0" data-role="connector">
+      <path d="M 376.12 1565.28 L 178.79 1565.28 Q 172.79 1565.28, 172.79 1559.28 L 172.79 1091.68 Q 172.79 1085.68, 178.79 1085.68 L 710.85 1085.68" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__NextPrev__DisposeAll__0" data-role="connector">
+      <path d="M 742.65 1377.07 L 752.65 1377.07 Q 758.65 1377.07, 758.65 1383.07 L 758.65 1456.83 Q 758.65 1462.83, 752.65 1462.83 L 748.65 1462.83 Q 742.65 1462.83, 742.65 1468.83 L 742.65 1545.48" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="mcf375f__edge__DisposeAll__CourseDetail__0" data-role="connector">
+      <path d="M 851.53 1578.19 L 1238.72 1578.19 Q 1244.72 1578.19, 1244.72 1572.19 L 1244.72 625.22 Q 1244.72 619.22, 1238.72 619.22 L 862.98 619.22" class="m-path" marker-end="url(#mcf375f__mk-arrow)"/>
+    </g>
+    <g class="m-node m-node--stadium" id="mcf375f__node__Start" data-role="vertex">
+      <rect x="455.34" y="50" width="111.85" height="36.9" rx="18.45" ry="18.45" class="m-shape"/>
+      <text x="511.27" y="68.45" class="m-label t-label" text-anchor="middle">Buka Aplikasi</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__CourseList" data-role="vertex">
+      <rect x="432.41" y="146.9" width="157.71" height="36.9" class="m-shape"/>
+      <text x="511.27" y="165.35" class="m-label t-label" text-anchor="middle">Halaman Course List</text>
+    </g>
+    <g class="m-node m-node--diamond" id="mcf375f__node__FetchCourses" data-role="vertex">
+      <polygon points="511.27,243.8 599.84,283.84 511.27,323.87 422.69,283.84" class="m-shape"/>
+      <text x="511.27" y="283.84" class="m-label t-label" text-anchor="middle">Fetch Courses</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__DisplayCourses" data-role="vertex">
+      <rect x="103.85" y="443.87" width="221.54" height="36.9" class="m-shape"/>
+      <text x="214.62" y="462.32" class="m-label t-label" text-anchor="middle">Tampilkan Daftar Kartu Course</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__Error1" data-role="vertex">
+      <rect x="365.39" y="443.87" width="291.76" height="36.9" class="m-shape"/>
+      <text x="511.27" y="462.32" class="m-label t-label" text-anchor="middle">Tampilkan ErrorStateView + Tombol Retry</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__Spinner1" data-role="vertex">
+      <rect x="697.14" y="443.87" width="279.24" height="36.9" class="m-shape"/>
+      <text x="836.76" y="462.32" class="m-label t-label" text-anchor="middle">Tampilkan Shimmer / Progress Indicator</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__SearchFilter" data-role="vertex">
+      <rect x="-12.94" y="600.77" width="193.92" height="36.9" class="m-shape"/>
+      <text x="84.02" y="619.22" class="m-label t-label" text-anchor="middle">Filter Kategori / Cari Judul</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__CourseDetail" data-role="vertex">
+      <rect x="690.44" y="600.77" width="171.19" height="36.9" class="m-shape"/>
+      <text x="776.03" y="619.22" class="m-label t-label" text-anchor="middle">Halaman Detail Course</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__Empty1" data-role="vertex">
+      <rect x="197.31" y="757.67" width="200.68" height="36.9" class="m-shape"/>
+      <text x="297.64" y="776.12" class="m-label t-label" text-anchor="middle">Tampilkan EmptyStateView</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__DisplayLessons" data-role="vertex">
+      <rect x="649.82" y="757.67" width="252.43" height="36.9" class="m-shape"/>
+      <text x="776.03" y="776.12" class="m-label t-label" text-anchor="middle">Tampilkan Info Kursus &amp; List Lesson</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__LessonPlayer" data-role="vertex">
+      <rect x="693.43" y="914.57" width="165.21" height="36.9" class="m-shape"/>
+      <text x="776.03" y="933.02" class="m-label t-label" text-anchor="middle">Halaman Video Player</text>
+    </g>
+    <g class="m-node m-node--diamond" id="mcf375f__node__InitVideo" data-role="vertex">
+      <polygon points="776.03,1011.47 903.7,1060.95 776.03,1110.42 648.37,1060.95" class="m-shape"/>
+      <text x="776.03" y="1060.95" class="m-label t-label" text-anchor="middle">Inisialisasi Video Player</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__PlayVideo" data-role="vertex">
+      <rect x="333" y="1230.42" width="269.43" height="36.9" class="m-shape"/>
+      <text x="467.72" y="1248.87" class="m-label t-label" text-anchor="middle">Putar Video &amp; Aktifkan Player Controls</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__VideoError" data-role="vertex">
+      <rect x="642.44" y="1230.42" width="267.2" height="36.9" class="m-shape"/>
+      <text x="776.03" y="1248.87" class="m-label t-label" text-anchor="middle">Tampilkan Error Video + Tombol Retry</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__VideoSpinner" data-role="vertex">
+      <rect x="949.63" y="1230.42" width="275.09" height="36.9" class="m-shape"/>
+      <text x="1087.18" y="1248.87" class="m-label t-label" text-anchor="middle">Tampilkan Buffering / Loading Indicator</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__Controls" data-role="vertex">
+      <rect x="192.79" y="1358.62" width="252.21" height="36.9" class="m-shape"/>
+      <text x="318.89" y="1377.07" class="m-label t-label" text-anchor="middle">Kontrol: Play, Pause, Seek, Skip 10s</text>
+    </g>
+    <g class="m-node m-node--diamond" id="mcf375f__node__NextPrev" data-role="vertex">
+      <polygon points="613.82,1327.32 742.65,1377.07 613.82,1426.83 485,1377.07" class="m-shape"/>
+      <text x="613.82" y="1377.07" class="m-label t-label" text-anchor="middle">Ganti Lesson / Navigasi</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__DisposeOld" data-role="vertex">
+      <rect x="376.12" y="1546.83" width="236.18" height="36.9" class="m-shape"/>
+      <text x="494.21" y="1565.28" class="m-label t-label" text-anchor="middle">Pause &amp; Dispose Controller Lama</text>
+    </g>
+    <g class="m-node m-node--rect" id="mcf375f__node__DisposeAll" data-role="vertex">
+      <rect x="652.3" y="1546.83" width="199.23" height="36.9" class="m-shape"/>
+      <text x="751.91" y="1565.28" class="m-label t-label" text-anchor="middle">Pause &amp; Dispose Controller</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="810.34" y="352.7" width="52.84" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="836.76" y="363.85" class="m-label t-edge" text-anchor="middle">Loading</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="439.72" y="339.38" width="84.04" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="481.74" y="350.53" class="m-label t-edge" text-anchor="middle">Error / Offline</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="331.15" y="246" width="62.46" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="362.37" y="257.15" class="m-label t-edge" text-anchor="middle">Tap Retry</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="258.57" y="583.49" width="78.15" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="297.64" y="594.64" class="m-label t-edge" text-anchor="middle">Data Kosong</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="-28.94" y="764.97" width="145.17" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="43.65" y="776.12" class="m-label t-edge" text-anchor="middle">Tap Refresh / Reset Filter</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="190.3" y="362.71" width="48.63" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="214.62" y="373.86" class="m-label t-edge" text-anchor="middle">Sukses</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="5.32" y="451.17" width="60.28" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="35.45" y="462.32" class="m-label t-edge" text-anchor="middle">Ada Hasil</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="35.36" y="660.52" width="97.32" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="84.02" y="671.67" class="m-label t-edge" text-anchor="middle">Tidak Ditemukan</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="475.04" y="529.62" width="73.49" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="511.79" y="540.77" class="m-label t-edge" text-anchor="middle">Pilih Course</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="739.53" y="843.42" width="73.02" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="776.03" y="854.57" class="m-label t-edge" text-anchor="middle">Pilih Lesson</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="1060.76" y="1122.16" width="52.84" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="1087.18" y="1133.31" class="m-label t-edge" text-anchor="middle">Loading</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="713.33" y="1135.27" width="125.4" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="776.03" y="1146.42" class="m-label t-edge" text-anchor="middle">Error / Broken Stream</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="930.1" y="1074.53" width="62.46" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="961.32" y="1085.68" class="m-label t-edge" text-anchor="middle">Tap Retry</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="443.4" y="1122.16" width="48.63" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="467.72" y="1133.31" class="m-label t-edge" text-anchor="middle">Sukses</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="393.3" y="1408.8" width="79.4" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="433" y="1419.95" class="m-label t-edge" text-anchor="middle">Ganti Lesson</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="671.91" y="1493.68" width="141.48" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="742.65" y="1504.83" class="m-label t-edge" text-anchor="middle">Kembali / Tutup Halaman</text>
+    </g>
+  </g>
+</svg>
