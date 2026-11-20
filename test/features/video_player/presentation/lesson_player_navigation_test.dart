@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -9,8 +10,10 @@ import 'package:course_app/features/course/domain/repositories/course_repository
 import 'package:course_app/features/course/data/repositories/course_repository_impl.dart';
 import 'package:course_app/features/video_player/presentation/screens/lesson_player_screen.dart';
 
-class TestNavRepository implements CourseRepository {
-  static const dummyCourse = Course(
+class MockCourseRepository extends Mock implements CourseRepository {}
+
+void main() {
+  const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Architecture',
     tagline: 'Deep dive',
@@ -46,19 +49,21 @@ class TestNavRepository implements CourseRepository {
     ],
   );
 
-  @override
-  Future<List<Course>> getCourses() async => [dummyCourse];
+  late MockCourseRepository mockRepository;
 
-  @override
-  Future<Course> getCourseById(String id) async => dummyCourse;
+  setUp(() {
+    mockRepository = MockCourseRepository();
+    when(() => mockRepository.getCourses())
+        .thenAnswer((_) async => [dummyCourse]);
+    when(() => mockRepository.getCourseById('c1'))
+        .thenAnswer((_) async => dummyCourse);
+    when(() => mockRepository.getLessonById('c1', 'l1'))
+        .thenAnswer((_) async => dummyCourse.lessons[0]);
+    when(() => mockRepository.getLessonById('c1', 'l2'))
+        .thenAnswer((_) async => dummyCourse.lessons[1]);
+  });
 
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async =>
-      dummyCourse.lessons.firstWhere((l) => l.id == lessonId);
-}
-
-void main() {
-  testWidgets('clicking Berikutnya button navigates to next lesson',
+  testWidgets('clicking Berikutnya button navigates to next lesson (Mocktail)',
       (tester) async {
     tester.view.physicalSize = const Size(800, 1200);
     tester.view.devicePixelRatio = 1.0;
@@ -82,7 +87,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          courseRepositoryProvider.overrideWithValue(TestNavRepository()),
+          courseRepositoryProvider.overrideWithValue(mockRepository),
         ],
         child: MaterialApp.router(
           routerConfig: router,
@@ -103,5 +108,6 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
 
     expect(find.text('Lesson 2'), findsWidgets);
+    verify(() => mockRepository.getCourseById('c1')).called(greaterThanOrEqualTo(1));
   });
 }

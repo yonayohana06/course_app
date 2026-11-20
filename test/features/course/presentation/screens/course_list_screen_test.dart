@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -9,39 +10,11 @@ import 'package:course_app/features/course/domain/repositories/course_repository
 import 'package:course_app/features/course/data/repositories/course_repository_impl.dart';
 import 'package:course_app/features/course/presentation/screens/course_list_screen.dart';
 
-class FakeCourseRepository implements CourseRepository {
-  List<Course> coursesToReturn;
-  Exception? errorToThrow;
-  Completer<List<Course>>? completer;
-  int getCoursesCallCount = 0;
-
-  FakeCourseRepository({
-    this.coursesToReturn = const [],
-    this.errorToThrow,
-    this.completer,
-  });
-
-  @override
-  Future<List<Course>> getCourses() async {
-    getCoursesCallCount++;
-    if (completer != null) {
-      return completer!.future;
-    }
-    if (errorToThrow != null) {
-      throw errorToThrow!;
-    }
-    return coursesToReturn;
-  }
-
-  @override
-  Future<Course> getCourseById(String id) async => coursesToReturn.first;
-
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async =>
-      coursesToReturn.first.lessons.first;
-}
+class MockCourseRepository extends Mock implements CourseRepository {}
 
 void main() {
+  late MockCourseRepository mockRepository;
+
   const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Advanced',
@@ -72,6 +45,10 @@ void main() {
     ],
   );
 
+  setUp(() {
+    mockRepository = MockCourseRepository();
+  });
+
   Widget createWidgetUnderTest(CourseRepository repo) {
     return ProviderScope(
       overrides: [
@@ -83,13 +60,13 @@ void main() {
     );
   }
 
-  group('CourseListScreen UI States', () {
+  group('CourseListScreen UI States with Mocktail', () {
     testWidgets('shows loading indicator while fetching courses',
         (tester) async {
       final completer = Completer<List<Course>>();
-      final repo = FakeCourseRepository(completer: completer);
+      when(() => mockRepository.getCourses()).thenAnswer((_) => completer.future);
 
-      await tester.pumpWidget(createWidgetUnderTest(repo));
+      await tester.pumpWidget(createWidgetUnderTest(mockRepository));
       await tester.pump(); // Start build
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -99,38 +76,40 @@ void main() {
 
       expect(find.byType(CircularProgressIndicator), findsNothing);
       expect(find.text('Flutter Advanced'), findsOneWidget);
+      verify(() => mockRepository.getCourses()).called(1);
     });
 
     testWidgets('shows empty state view when no courses are available',
         (tester) async {
-      final repo = FakeCourseRepository(coursesToReturn: []);
+      when(() => mockRepository.getCourses()).thenAnswer((_) async => []);
 
-      await tester.pumpWidget(createWidgetUnderTest(repo));
+      await tester.pumpWidget(createWidgetUnderTest(mockRepository));
       await tester.pumpAndSettle();
 
       expect(find.text('Belum ada kursus tersedia'), findsOneWidget);
+      verify(() => mockRepository.getCourses()).called(1);
     });
 
     testWidgets('shows error state view with retry button on failure',
         (tester) async {
-      final repo = FakeCourseRepository(
-        errorToThrow: Exception('Koneksi terputus'),
-      );
+      when(() => mockRepository.getCourses())
+          .thenThrow(Exception('Koneksi terputus'));
 
-      await tester.pumpWidget(createWidgetUnderTest(repo));
+      await tester.pumpWidget(createWidgetUnderTest(mockRepository));
       await tester.pumpAndSettle();
 
       expect(find.text('Terjadi Kesalahan'), findsOneWidget);
       expect(find.text('Coba Lagi'), findsOneWidget);
 
       // Fix error and tap retry
-      repo.errorToThrow = null;
-      repo.coursesToReturn = [dummyCourse];
+      when(() => mockRepository.getCourses())
+          .thenAnswer((_) async => [dummyCourse]);
 
       await tester.tap(find.text('Coba Lagi'));
       await tester.pumpAndSettle();
 
       expect(find.text('Flutter Advanced'), findsOneWidget);
+      verify(() => mockRepository.getCourses()).called(greaterThanOrEqualTo(2));
     });
   });
 }

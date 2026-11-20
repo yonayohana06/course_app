@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -8,27 +9,12 @@ import 'package:course_app/features/course/data/repositories/course_repository_i
 import 'package:course_app/features/video_player/domain/entities/player_state.dart';
 import 'package:course_app/features/video_player/presentation/controllers/lesson_player_controller.dart';
 
-class FakePlayerRepository implements CourseRepository {
-  final Course course;
-
-  FakePlayerRepository(this.course);
-
-  @override
-  Future<List<Course>> getCourses() async => [course];
-
-  @override
-  Future<Course> getCourseById(String id) async {
-    if (id == course.id) return course;
-    throw Exception('Course not found');
-  }
-
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async {
-    return course.lessons.firstWhere((l) => l.id == lessonId);
-  }
-}
+class MockCourseRepository extends Mock implements CourseRepository {}
 
 void main() {
+  late MockCourseRepository mockRepository;
+  late ProviderContainer container;
+
   const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Architecture',
@@ -65,28 +51,29 @@ void main() {
     ],
   );
 
-  group('LessonPlayerController', () {
-    late ProviderContainer container;
+  setUp(() {
+    mockRepository = MockCourseRepository();
+    container = ProviderContainer(
+      overrides: [
+        courseRepositoryProvider.overrideWithValue(mockRepository),
+      ],
+    );
+  });
 
-    setUp(() {
-      container = ProviderContainer(
-        overrides: [
-          courseRepositoryProvider
-              .overrideWithValue(FakePlayerRepository(dummyCourse)),
-        ],
-      );
-    });
+  tearDown(() {
+    container.dispose();
+  });
 
-    tearDown(() {
-      container.dispose();
-    });
-
+  group('LessonPlayerController with Mocktail', () {
     test('initial state before init is initial', () {
       final state = container.read(lessonPlayerControllerProvider);
       expect(state.status, PlayerStatus.initial);
     });
 
     test('initialize loads course and lesson metadata', () async {
+      when(() => mockRepository.getCourseById('c1'))
+          .thenAnswer((_) async => dummyCourse);
+
       final controller =
           container.read(lessonPlayerControllerProvider.notifier);
 
@@ -98,9 +85,13 @@ void main() {
       expect(state.hasPreviousLesson, isFalse);
       expect(state.hasNextLesson, isTrue);
       expect(state.nextLesson?.id, 'l2');
+      verify(() => mockRepository.getCourseById('c1')).called(1);
     });
 
     test('switching to second lesson updates next and previous flags', () async {
+      when(() => mockRepository.getCourseById('c1'))
+          .thenAnswer((_) async => dummyCourse);
+
       final controller =
           container.read(lessonPlayerControllerProvider.notifier);
 
@@ -111,9 +102,13 @@ void main() {
       expect(state.hasPreviousLesson, isTrue);
       expect(state.hasNextLesson, isFalse);
       expect(state.previousLesson?.id, 'l1');
+      verify(() => mockRepository.getCourseById('c1')).called(1);
     });
 
     test('handles non-existent course error cleanly', () async {
+      when(() => mockRepository.getCourseById('invalid_id'))
+          .thenThrow(Exception('Course not found'));
+
       final controller =
           container.read(lessonPlayerControllerProvider.notifier);
 
@@ -122,6 +117,7 @@ void main() {
       final state = container.read(lessonPlayerControllerProvider);
       expect(state.status, PlayerStatus.error);
       expect(state.errorMessage, isNotNull);
+      verify(() => mockRepository.getCourseById('invalid_id')).called(1);
     });
   });
 }

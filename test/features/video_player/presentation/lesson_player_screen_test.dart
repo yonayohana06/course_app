@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:course_app/features/course/domain/entities/course.dart';
 import 'package:course_app/features/course/domain/entities/instructor.dart';
 import 'package:course_app/features/course/domain/entities/lesson.dart';
@@ -8,23 +9,11 @@ import 'package:course_app/features/course/domain/repositories/course_repository
 import 'package:course_app/features/course/data/repositories/course_repository_impl.dart';
 import 'package:course_app/features/video_player/presentation/screens/lesson_player_screen.dart';
 
-class FakePlayerRepo implements CourseRepository {
-  final Course course;
-
-  FakePlayerRepo(this.course);
-
-  @override
-  Future<List<Course>> getCourses() async => [course];
-
-  @override
-  Future<Course> getCourseById(String id) async => course;
-
-  @override
-  Future<Lesson> getLessonById(String courseId, String lessonId) async =>
-      course.lessons.firstWhere((l) => l.id == lessonId);
-}
+class MockCourseRepository extends Mock implements CourseRepository {}
 
 void main() {
+  late MockCourseRepository mockRepository;
+
   const dummyCourse = Course(
     id: 'c1',
     title: 'Flutter Architecture',
@@ -61,11 +50,22 @@ void main() {
     ],
   );
 
+  setUp(() {
+    mockRepository = MockCourseRepository();
+    when(() => mockRepository.getCourses())
+        .thenAnswer((_) async => [dummyCourse]);
+    when(() => mockRepository.getCourseById('c1'))
+        .thenAnswer((_) async => dummyCourse);
+    when(() => mockRepository.getLessonById('c1', 'l1'))
+        .thenAnswer((_) async => dummyCourse.lessons[0]);
+    when(() => mockRepository.getLessonById('c1', 'l2'))
+        .thenAnswer((_) async => dummyCourse.lessons[1]);
+  });
+
   Widget createWidgetUnderTest(String lessonId) {
     return ProviderScope(
       overrides: [
-        courseRepositoryProvider
-            .overrideWithValue(FakePlayerRepo(dummyCourse)),
+        courseRepositoryProvider.overrideWithValue(mockRepository),
       ],
       child: MaterialApp(
         home: LessonPlayerScreen(courseId: 'c1', lessonId: lessonId),
@@ -73,7 +73,7 @@ void main() {
     );
   }
 
-  group('LessonPlayerScreen UI', () {
+  group('LessonPlayerScreen UI with Mocktail', () {
     testWidgets('renders lesson details, order badge, and summary',
         (tester) async {
       await tester.pumpWidget(createWidgetUnderTest('l1'));
@@ -85,6 +85,7 @@ void main() {
       expect(find.text('Ringkasan pengenalan arsitektur.'), findsOneWidget);
       expect(find.text('Berikutnya'), findsOneWidget);
       expect(find.text('Sebelumnya'), findsOneWidget);
+      verify(() => mockRepository.getCourseById('c1')).called(greaterThanOrEqualTo(1));
     });
 
     testWidgets(
