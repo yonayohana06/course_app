@@ -36,9 +36,7 @@ flowchart TD
     Entities -->|5. Received by| Notifier
 ```
 
-<p align="center">
-  <img src="images/diagram-design-system.svg" alt="Diagram Arsitektur Sistem" width="90%" />
-</p>
+---
 
 ### Keunggulan Arsitektur:
 
@@ -86,10 +84,6 @@ erDiagram
     }
 ```
 
-<p align="center">
-  <img src="images/diagram-erd.svg" alt="Diagram ERD" width="90%" />
-</p>
-
 ---
 
 ## 3. Flowchart Alur Navigasi & Pemutaran Video
@@ -125,10 +119,6 @@ flowchart TD
     NextPrev -->|Ganti Lesson| DisposeOld[Pause & Dispose Controller Lama] --> InitVideo
     NextPrev -->|Kembali / Tutup Halaman| DisposeAll[Pause & Dispose Controller] --> CourseDetail
 ```
-
-<p align="center">
-  <img src="images/diagram-flow.svg" alt="Diagram Flow" width="90%" />
-</p>
 
 ---
 
@@ -177,10 +167,6 @@ sequenceDiagram
     UI->>Player: pause() & dispose()
     UI-->>User: Kembali ke Detail Kursus tanpa sisa proses background
 ```
-
-<p align="center">
-  <img src="images/diagram-sequence.svg" alt="Diagram Sequence" width="90%" />
-</p>
 
 ---
 
