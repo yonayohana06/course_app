@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
-import '../../../../core/theme/app_colors.dart';
+
+import '../../../../core/design_system/design_system.dart';
 import '../../../course/domain/entities/lesson.dart';
 
 class LessonPlaylistSheet extends StatelessWidget {
@@ -67,15 +68,20 @@ class LessonPlaylistSheet extends StatelessWidget {
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: lessons.length,
-              separatorBuilder: (context, index) =>
-                  const Divider(height: 1, indent: 64, color: AppColors.borderLight),
+              separatorBuilder: (context, index) => const Divider(
+                height: 1,
+                indent: 64,
+                color: AppColors.borderLight,
+              ),
               itemBuilder: (context, index) {
                 final lesson = lessons[index];
                 final isActive = lesson.id == activeLessonId;
 
                 return ListTile(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 2,
+                  ),
                   leading: Container(
                     width: 32,
                     height: 32,
@@ -87,8 +93,11 @@ class LessonPlaylistSheet extends StatelessWidget {
                     ),
                     child: Center(
                       child: isActive
-                          ? const Icon(Icons.play_arrow_rounded,
-                              size: 18, color: Colors.white)
+                          ? const Icon(
+                              Icons.play_arrow_rounded,
+                              size: 18,
+                              color: Colors.white,
+                            )
                           : Text(
                               '${lesson.order}',
                               style: const TextStyle(

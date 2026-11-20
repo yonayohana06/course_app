@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
-import '../../../../core/theme/app_colors.dart';
+
+import '../../../../core/design_system/design_system.dart';
 
 class CustomPlayerControls extends StatelessWidget {
   final bool isPlaying;
@@ -31,7 +32,9 @@ class CustomPlayerControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxSeconds = duration.inSeconds > 0 ? duration.inSeconds.toDouble() : 1.0;
+    final maxSeconds = duration.inSeconds > 0
+        ? duration.inSeconds.toDouble()
+        : 1.0;
     final currentSeconds = position.inSeconds.toDouble().clamp(0.0, maxSeconds);
 
     return Container(
@@ -60,7 +63,9 @@ class CustomPlayerControls extends StatelessWidget {
                     activeTrackColor: AppColors.primaryLight,
                     inactiveTrackColor: Colors.white.withValues(alpha: 0.3),
                     thumbColor: Colors.white,
-                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                    thumbShape: const RoundSliderThumbShape(
+                      enabledThumbRadius: 6,
+                    ),
                     trackHeight: 3,
                   ),
                   child: Slider(
@@ -75,10 +80,7 @@ class CustomPlayerControls extends StatelessWidget {
               ),
               Text(
                 _formatDuration(duration),
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
-                ),
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ],
           ),
