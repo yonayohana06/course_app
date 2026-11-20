@@ -1,0 +1,270 @@
+<svg class="dark " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1567.68 1065.35" width="1567.68" height="1065.35" id="m5dca27__root" data-diagram-type="sequence">
+  <style data-mercat-style="universal">.mercat text{font-family:'Google Sans',Roboto,Arial,sans-serif;fill:var(--m-text);dominant-baseline:central}.mercat .m-node .m-shape{fill:var(--m-node-fill);stroke:var(--m-node-stroke);stroke-width:1.5px}.mercat .m-edge .m-path{fill:none;stroke:var(--m-line);stroke-width:1.5px}.mercat .m-edge--dashed .m-path,.mercat .m-edge--dashed{stroke-dasharray:5 4}.mercat .m-edge-label .m-shape{fill:var(--m-pill-bg);stroke:var(--m-pill-border);stroke-width:1px}.mercat .m-edge-label .m-label{fill:var(--m-text-sec)}.mercat .m-group .m-shape{fill:var(--m-group-fill);stroke:var(--m-group-stroke);stroke-width:1px}.mercat .m-group .m-label{fill:var(--m-group-text)}.mercat .m-note .m-shape{fill:var(--m-note-fill);stroke:var(--m-note-stroke);stroke-width:1px}.mercat .m-note .m-label{fill:var(--m-note-text)}.mercat .t-label{font-size:13px;font-weight:500}.mercat .t-group{font-size:12px;font-weight:600}.mercat .t-edge{font-size:11px;font-weight:400}.mercat .t-caption{font-size:10px;font-weight:500}</style>
+  <style data-mercat-style="theme-light">#m5dca27__root{--m-bg:#ffffff;--m-text:#1f1f1f;--m-text-sec:#797979;--m-line:#545454;--m-node-fill:#f8f9fa;--m-node-stroke:#747775;--m-inner-stroke:#e4e4e4;--m-group-fill:#f8f9fa;--m-group-stroke:#747775;--m-group-hdr:#f4f4f4;--m-group-text:#1f1f1f;--m-pill-bg:#fbfbfb;--m-pill-border:#d7d7d7;--m-note-fill:#fef9e7;--m-note-stroke:#f39c12;--m-note-text:#1f1f1f}</style>
+  <style data-mercat-style="theme-dark">#m5dca27__root.dark{--m-bg:#1f1f1f;--m-text:#e3e3e3;--m-text-sec:#959595;--m-line:#bfbfbf;--m-node-fill:#2d2e30;--m-node-stroke:#8e918f;--m-inner-stroke:#373737;--m-group-fill:#2d2e30;--m-group-stroke:#8e918f;--m-group-hdr:#292929;--m-group-text:#e3e3e3;--m-pill-bg:#232323;--m-pill-border:#424242;--m-note-fill:#69550d;--m-note-stroke:#f39c12;--m-note-text:#e3e3e3}</style>
+  <style data-mercat-style="type">#m5dca27__root .seq-actor-icon-bg{fill:none;stroke:var(--m-line);stroke-width:1.5px}#m5dca27__root .seq-actor-icon-line{fill:none;stroke:var(--m-line);stroke-width:1.5px}#m5dca27__root .seq-lifeline&gt;.m-path{fill:none;stroke:var(--m-line);stroke-width:0.75px;stroke-dasharray:6 4}#m5dca27__root .seq-box&gt;.m-shape{fill:var(--m-group-hdr);stroke:var(--m-inner-stroke);stroke-width:1px}#m5dca27__root .seq-number-bg{fill:var(--m-line);stroke:var(--m-bg);stroke-width:1px}#m5dca27__root .seq-number{fill:var(--m-bg)}</style>
+  <style data-mercat-style="diagram">#m5dca27__root #m5dca27__group__Presentation_20Layer .m-shape,#m5dca27__root #m5dca27__group__Presentation_20Layer .m-path{fill:#e3f2fd;stroke:#1264a1}#m5dca27__root #m5dca27__group__Domain_20Layer .m-shape,#m5dca27__root #m5dca27__group__Domain_20Layer .m-path{fill:#e8f5e9;stroke:#367d3b}#m5dca27__root #m5dca27__group__Media_20_2f_20Platform .m-shape,#m5dca27__root #m5dca27__group__Media_20_2f_20Platform .m-path{fill:#fff3e0;stroke:#a16912}#m5dca27__root.dark #m5dca27__group__Presentation_20Layer .m-shape,#m5dca27__root.dark #m5dca27__group__Presentation_20Layer .m-path{fill:#0f4166;stroke:#3799e2}#m5dca27__root.dark #m5dca27__group__Domain_20Layer .m-shape,#m5dca27__root.dark #m5dca27__group__Domain_20Layer .m-path{fill:#264f29;stroke:#5eba65}#m5dca27__root.dark #m5dca27__group__Media_20_2f_20Platform .m-shape,#m5dca27__root.dark #m5dca27__group__Media_20_2f_20Platform .m-path{fill:#6d4609;stroke:#e8a030}</style>
+  <g class="mercat mercat-sequence" transform="translate(0, 30)">
+    <defs>
+      <marker id="m5dca27__mk-arrow" refX="9.45" refY="3.4" markerWidth="10.8" markerHeight="6.8" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 0 L 10.8 3.4 L 0 6.8 Z" class="m-marker" fill="var(--m-line)" stroke="none"/>
+      </marker>
+    </defs>
+    <g class="m-group seq-box" id="m5dca27__group__Presentation_20Layer" data-role="group">
+      <rect x="396.76" y="0" width="554.49" height="1005.35" rx="4" ry="4" class="m-shape"/>
+      <text x="674.01" y="14" class="m-group-title m-label t-group" text-anchor="middle">Presentation Layer</text>
+    </g>
+    <g class="m-group seq-box" id="m5dca27__group__Domain_20Layer" data-role="group">
+      <rect x="975.25" y="0" width="180.78" height="1005.35" rx="4" ry="4" class="m-shape"/>
+      <text x="1065.65" y="14" class="m-group-title m-label t-group" text-anchor="middle">Domain Layer</text>
+    </g>
+    <g class="m-group seq-box" id="m5dca27__group__Media_20_2f_20Platform" data-role="group">
+      <rect x="1265.32" y="0" width="272.36" height="1005.35" rx="4" ry="4" class="m-shape"/>
+      <text x="1401.5" y="14" class="m-group-title m-label t-group" text-anchor="middle">Media / Platform</text>
+    </g>
+    <g class="seq-lifeline">
+      <line x1="116.06" y1="92.45" x2="116.06" y2="932.9" class="m-path"/>
+    </g>
+    <g class="seq-lifeline">
+      <line x1="499.53" y1="70" x2="499.53" y2="932.9" class="m-path"/>
+    </g>
+    <g class="seq-lifeline">
+      <line x1="850.26" y1="70" x2="850.26" y2="932.9" class="m-path"/>
+    </g>
+    <g class="seq-lifeline">
+      <line x1="1065.65" y1="70" x2="1065.65" y2="932.9" class="m-path"/>
+    </g>
+    <g class="seq-lifeline">
+      <line x1="1401.5" y1="70" x2="1401.5" y2="932.9" class="m-path"/>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__User__UI__0" data-role="connector">
+      <path d="M 116.06 131.75 L 499.53 131.75" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="307.8" y="119.6" class="m-label t-edge" text-anchor="middle">Buka halaman video lesson</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="116.06" cy="131.75" r="9" class="seq-number-bg"/>
+        <text x="116.06" y="131.75" class="m-label seq-number t-caption" text-anchor="middle">1</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Controller__0" data-role="connector">
+      <path d="M 499.53 175.05 L 850.26 175.05" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="162.9" class="m-label t-edge" text-anchor="middle">loadLesson(courseId, lessonId)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="175.05" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="175.05" class="m-label seq-number t-caption" text-anchor="middle">2</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__Controller__Repo__0" data-role="connector">
+      <path d="M 850.26 218.35 L 1065.65 218.35" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="957.95" y="206.2" class="m-label t-edge" text-anchor="middle">getCourseById(courseId)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="850.26" cy="218.35" r="9" class="seq-number-bg"/>
+        <text x="850.26" y="218.35" class="m-label seq-number t-caption" text-anchor="middle">3</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Repo__Controller__0" data-role="connector">
+      <path d="M 1065.65 261.65 L 850.26 261.65" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="957.95" y="249.5" class="m-label t-edge" text-anchor="middle">Course data + Lesson list</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="1065.65" cy="261.65" r="9" class="seq-number-bg"/>
+        <text x="1065.65" y="261.65" class="m-label seq-number t-caption" text-anchor="middle">4</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Controller__UI__0" data-role="connector">
+      <path d="M 850.26 304.95 L 499.53 304.95" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="292.8" class="m-label t-edge" text-anchor="middle">Update state: status = ready, currentLesson</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="850.26" cy="304.95" r="9" class="seq-number-bg"/>
+        <text x="850.26" y="304.95" class="m-label seq-number t-caption" text-anchor="middle">5</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Player__0" data-role="connector">
+      <path d="M 499.53 348.25 L 1401.5 348.25" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="336.1" class="m-label t-edge" text-anchor="middle">Inisialisasi VideoPlayerController(lesson.videoUrl)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="348.25" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="348.25" class="m-label seq-number t-caption" text-anchor="middle">6</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Player__UI__0" data-role="connector">
+      <path d="M 1401.5 391.55 L 499.53 391.55" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="1233.57" y="379.4" class="m-label t-edge" text-anchor="middle">Controller initialized (AspectRatio, Duration)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="1401.5" cy="391.55" r="9" class="seq-number-bg"/>
+        <text x="1401.5" y="391.55" class="m-label seq-number t-caption" text-anchor="middle">7</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Player__1" data-role="connector">
+      <path d="M 499.53 434.85 L 1401.5 434.85" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="422.7" class="m-label t-edge" text-anchor="middle">Buat ChewieController (autoPlay: true)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="434.85" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="434.85" class="m-label seq-number t-caption" text-anchor="middle">8</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Player__User__0" data-role="connector">
+      <path d="M 1401.5 478.15 L 116.06 478.15" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="1233.57" y="466" class="m-label t-edge" text-anchor="middle">Streaming video dimulai dengan kontrol interaktif</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="1401.5" cy="478.15" r="9" class="seq-number-bg"/>
+        <text x="1401.5" y="478.15" class="m-label seq-number t-caption" text-anchor="middle">9</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__User__UI__1" data-role="connector">
+      <path d="M 116.06 521.45 L 499.53 521.45" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="307.8" y="509.3" class="m-label t-edge" text-anchor="middle">Tekan tombol "Berikutnya" / Pilih lesson lain</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="116.06" cy="521.45" r="9" class="seq-number-bg"/>
+        <text x="116.06" y="521.45" class="m-label seq-number t-caption" text-anchor="middle">10</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Player__2" data-role="connector">
+      <path d="M 499.53 596.8 L 1401.5 596.8" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="584.65" class="m-label t-edge" text-anchor="middle">pause() &amp; dispose() controller lama</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="596.8" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="596.8" class="m-label seq-number t-caption" text-anchor="middle">11</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Controller__1" data-role="connector">
+      <path d="M 499.53 640.1 L 850.26 640.1" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="627.95" class="m-label t-edge" text-anchor="middle">loadLesson(courseId, nextLessonId)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="640.1" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="640.1" class="m-label seq-number t-caption" text-anchor="middle">12</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Controller__UI__1" data-role="connector">
+      <path d="M 850.26 683.4 L 499.53 683.4" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="671.25" class="m-label t-edge" text-anchor="middle">Update active lesson</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="850.26" cy="683.4" r="9" class="seq-number-bg"/>
+        <text x="850.26" y="683.4" class="m-label seq-number t-caption" text-anchor="middle">13</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Player__3" data-role="connector">
+      <path d="M 499.53 726.7 L 1401.5 726.7" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="714.55" class="m-label t-edge" text-anchor="middle">Inisialisasi Controller baru(nextLesson.videoUrl)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="726.7" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="726.7" class="m-label seq-number t-caption" text-anchor="middle">14</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__Player__User__1" data-role="connector">
+      <path d="M 1401.5 770 L 116.06 770" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="1233.57" y="757.85" class="m-label t-edge" text-anchor="middle">Memutar materi baru</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="1401.5" cy="770" r="9" class="seq-number-bg"/>
+        <text x="1401.5" y="770" class="m-label seq-number t-caption" text-anchor="middle">15</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__User__UI__2" data-role="connector">
+      <path d="M 116.06 813.3 L 499.53 813.3" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="307.8" y="801.15" class="m-label t-edge" text-anchor="middle">Tekan tombol Back (Keluar Halaman)</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="116.06" cy="813.3" r="9" class="seq-number-bg"/>
+        <text x="116.06" y="813.3" class="m-label seq-number t-caption" text-anchor="middle">16</text>
+      </g>
+    </g>
+    <g class="m-node m-edge" id="m5dca27__edge__UI__Player__4" data-role="connector">
+      <path d="M 499.53 856.6 L 1401.5 856.6" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="674.89" y="844.45" class="m-label t-edge" text-anchor="middle">pause() &amp; dispose()</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="856.6" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="856.6" class="m-label seq-number t-caption" text-anchor="middle">17</text>
+      </g>
+    </g>
+    <g class="m-node m-edge m-edge--dashed" id="m5dca27__edge__UI__User__0" data-role="connector">
+      <path d="M 499.53 899.9 L 116.06 899.9" class="m-path" marker-end="url(#m5dca27__mk-arrow)"/>
+      <g class="m-edge-label">
+        <text x="307.8" y="887.75" class="m-label t-edge" text-anchor="middle">Kembali ke Detail Kursus tanpa sisa proses background</text>
+      </g>
+      <g class="seq-number-badge">
+        <circle cx="499.53" cy="899.9" r="9" class="seq-number-bg"/>
+        <text x="499.53" y="899.9" class="m-label seq-number t-caption" text-anchor="middle">18</text>
+      </g>
+    </g>
+    <g class="m-node m-note m-node--note seq-note" id="m5dca27__node__note_5f0" data-role="annotation">
+      <polygon points="818.46,535.2 1077.31,535.2 1082.57,540.46 1082.57,561.5 818.46,561.5" class="m-shape"/>
+      <polyline points="1077.31,535.2 1077.31,540.46 1082.57,540.46" class="m-shape-note-fold"/>
+      <text x="950.51" y="548.35" class="m-label t-edge" text-anchor="middle">Mencegah Memory Leak &amp; Audio Overlap</text>
+    </g>
+    <g class="m-node m-node--actor seq-actor" id="m5dca27__node__User" data-role="actor">
+      <circle cx="116.06" cy="50" r="13.5" class="m-shape seq-actor-icon-bg"/>
+      <circle cx="116.06" cy="47" r="4.5" class="m-path seq-actor-icon-line"/>
+      <path d="M 106.5 59.53 C 108.69 57.56, 112.16 56, 116.06 56 C 119.96 56, 123.43 57.56, 125.62 59.53" class="m-path seq-actor-icon-line"/>
+      <text x="116.06" y="84" class="m-label t-label" text-anchor="middle">Pengguna (Student)</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor" id="m5dca27__node__UI" data-role="actor">
+      <rect x="404.76" y="30" width="189.53" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="499.53" y="50" class="m-label t-label" text-anchor="middle">LessonPlayerScreen</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor" id="m5dca27__node__Controller" data-role="actor">
+      <rect x="757.26" y="30" width="186" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="850.26" y="50" class="m-label t-label" text-anchor="middle">LessonPlayerNotifier</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor" id="m5dca27__node__Repo" data-role="actor">
+      <rect x="983.25" y="30" width="164.78" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="1065.65" y="50" class="m-label t-label" text-anchor="middle">CourseRepository</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor" id="m5dca27__node__Player" data-role="actor">
+      <rect x="1273.32" y="30" width="256.36" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="1401.5" y="50" class="m-label t-label" text-anchor="middle">VideoPlayer / ChewieController</text>
+    </g>
+    <g class="m-node m-node--actor seq-actor">
+      <circle cx="116.06" cy="952.9" r="13.5" class="m-shape seq-actor-icon-bg"/>
+      <circle cx="116.06" cy="949.9" r="4.5" class="m-path seq-actor-icon-line"/>
+      <path d="M 106.5 962.43 C 108.69 960.46, 112.16 958.9, 116.06 958.9 C 119.96 958.9, 123.43 960.46, 125.62 962.43" class="m-path seq-actor-icon-line"/>
+      <text x="116.06" y="986.9" class="m-label t-label" text-anchor="middle">Pengguna (Student)</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor">
+      <rect x="404.76" y="932.9" width="189.53" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="499.53" y="952.9" class="m-label t-label" text-anchor="middle">LessonPlayerScreen</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor">
+      <rect x="757.26" y="932.9" width="186" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="850.26" y="952.9" class="m-label t-label" text-anchor="middle">LessonPlayerNotifier</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor">
+      <rect x="983.25" y="932.9" width="164.78" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="1065.65" y="952.9" class="m-label t-label" text-anchor="middle">CourseRepository</text>
+    </g>
+    <g class="m-node m-node--round-rect seq-actor">
+      <rect x="1273.32" y="932.9" width="256.36" height="40" rx="4" ry="4" class="m-shape"/>
+      <text x="1401.5" y="952.9" class="m-label t-label" text-anchor="middle">VideoPlayer / ChewieController</text>
+    </g>
+  </g>
+</svg>
