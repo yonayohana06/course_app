@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'app_colors.dart';
 
 class AppShadows {
   AppShadows._();
@@ -21,7 +22,7 @@ class AppShadows {
 
   static List<BoxShadow> get button => [
         BoxShadow(
-          color: const Color(0xFF1E3A8A).withValues(alpha: 0.25),
+          color: AppColors.primary.withValues(alpha: 0.25),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),

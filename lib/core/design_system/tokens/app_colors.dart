@@ -3,10 +3,10 @@ import 'package:material_ui/material_ui.dart';
 class AppColors {
   AppColors._();
 
-  // Primary palette (Indigo / Navy)
-  static const Color primary = Color(0xFF1E3A8A); // Deep Indigo
-  static const Color primaryLight = Color(0xFF3B82F6); // Blue Accent
-  static const Color primaryDark = Color(0xFF0F172A); // Midnight Navy
+  // Primary palette (Burnt Orange / Rust)
+  static const Color primary = Color(0xFFC2410C); // Burnt Orange
+  static const Color primaryLight = Color(0xFFF97316); // Warm Orange Accent
+  static const Color primaryDark = Color(0xFF9A3412); // Deep Rust
 
   // Secondary palette (Cyan / Teal)
   static const Color secondary = Color(0xFF0D9488); // Teal
