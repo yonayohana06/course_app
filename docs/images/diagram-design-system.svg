@@ -1,0 +1,118 @@
+<svg class="dark " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770.69 896.4" width="770.69" height="896.4" id="m5cbff3__root" data-diagram-type="flowchart">
+  <style data-mercat-style="universal">.mercat text{font-family:'Google Sans',Roboto,Arial,sans-serif;fill:var(--m-text);dominant-baseline:central}.mercat .m-node .m-shape{fill:var(--m-node-fill);stroke:var(--m-node-stroke);stroke-width:1.5px}.mercat .m-edge .m-path{fill:none;stroke:var(--m-line);stroke-width:1.5px}.mercat .m-edge--dotted .m-path,.mercat .m-edge--dotted{stroke-dasharray:2 3}.mercat .m-edge-label .m-pill-bg,.mercat .m-edge-label .m-shape{fill:var(--m-pill-bg);stroke:var(--m-pill-border);stroke-width:1px}.mercat .m-edge-label .m-label{fill:var(--m-text-sec)}.mercat .m-group .m-shape{fill:var(--m-group-fill);stroke:var(--m-group-stroke);stroke-width:1px}.mercat .m-group .m-frame{fill:none;stroke:var(--m-group-stroke);stroke-width:1px}.mercat .m-group .m-header{fill:var(--m-group-hdr)}.mercat .m-group .m-label{fill:var(--m-group-text)}.mercat .t-label{font-size:13px;font-weight:500}.mercat .t-group{font-size:12px;font-weight:600}.mercat .t-edge{font-size:11px;font-weight:400}</style>
+  <style data-mercat-style="theme-light">#m5cbff3__root{--m-text:#1f1f1f;--m-text-sec:#797979;--m-line:#545454;--m-node-fill:#f8f9fa;--m-node-stroke:#747775;--m-group-fill:#f8f9fa;--m-group-stroke:#747775;--m-group-hdr:#f4f4f4;--m-group-text:#1f1f1f;--m-pill-bg:#fbfbfb;--m-pill-border:#d7d7d7}</style>
+  <style data-mercat-style="theme-dark">#m5cbff3__root.dark{--m-text:#e3e3e3;--m-text-sec:#959595;--m-line:#bfbfbf;--m-node-fill:#2d2e30;--m-node-stroke:#8e918f;--m-group-fill:#2d2e30;--m-group-stroke:#8e918f;--m-group-hdr:#292929;--m-group-text:#e3e3e3;--m-pill-bg:#232323;--m-pill-border:#424242}</style>
+  <style data-mercat-style="type">#m5cbff3__root .m-node .flowchart-divider,#m5cbff3__root .m-group .flowchart-divider{fill:none;stroke:var(--m-node-stroke);stroke-width:1px}#m5cbff3__root .m-edge--dotted .m-path{stroke-dasharray:3 3}#m5cbff3__root .m-group&gt;.m-shape{stroke:none}#m5cbff3__root .m-group&gt;.m-header{fill:var(--m-group-hdr);stroke:none}#m5cbff3__root .m-label.flowchart-subgraph-title{fill:var(--m-text-sec);font-size:12px;font-weight:600}</style>
+  <g class="mercat mercat-flowchart" transform="translate(30, -35)">
+    <defs>
+      <marker id="m5cbff3__mk-arrow" refX="9.45" refY="3.4" markerWidth="10.8" markerHeight="6.8" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+        <path d="M 0 0 L 10.8 3.4 L 0 6.8 Z" class="m-marker" fill="var(--m-line)" stroke="none"/>
+      </marker>
+    </defs>
+    <g class="m-node m-group" id="m5cbff3__group__Presentation_5fLayer" data-role="container">
+      <rect x="-15" y="50" width="318.67" height="363.2" rx="6" ry="6" class="m-shape"/>
+      <path d="M -15 56 Q -15 50, -9 50 L 297.67 50 Q 303.67 50, 303.67 56 L 303.67 78 L -15 78 Z" class="m-header"/>
+      <line x1="-15" y1="78" x2="303.67" y2="78" class="flowchart-divider"/>
+      <rect x="-15" y="50" width="318.67" height="363.2" rx="6" ry="6" class="m-frame"/>
+      <text x="-3" y="64" class="m-label flowchart-subgraph-title t-group" text-anchor="start">Presentation Layer</text>
+    </g>
+    <g class="m-node m-group" id="m5cbff3__group__Domain_5fLayer" data-role="container">
+      <rect x="70" y="550.1" width="251.43" height="366.3" rx="6" ry="6" class="m-shape"/>
+      <path d="M 70 556.1 Q 70 550.1, 76 550.1 L 315.43 550.1 Q 321.43 550.1, 321.43 556.1 L 321.43 578.1 L 70 578.1 Z" class="m-header"/>
+      <line x1="70" y1="578.1" x2="321.43" y2="578.1" class="flowchart-divider"/>
+      <rect x="70" y="550.1" width="251.43" height="366.3" rx="6" ry="6" class="m-frame"/>
+      <text x="82" y="564.1" class="m-label flowchart-subgraph-title t-group" text-anchor="start">Domain Layer</text>
+    </g>
+    <g class="m-node m-group" id="m5cbff3__group__Data_5fLayer" data-role="container">
+      <rect x="423.67" y="66.9" width="302.02" height="621.9" rx="6" ry="6" class="m-shape"/>
+      <path d="M 423.67 72.9 Q 423.67 66.9, 429.67 66.9 L 719.69 66.9 Q 725.69 66.9, 725.69 72.9 L 725.69 94.9 L 423.67 94.9 Z" class="m-header"/>
+      <line x1="423.67" y1="94.9" x2="725.69" y2="94.9" class="flowchart-divider"/>
+      <rect x="423.67" y="66.9" width="302.02" height="621.9" rx="6" ry="6" class="m-frame"/>
+      <text x="435.67" y="80.9" class="m-label flowchart-subgraph-title t-group" text-anchor="start">Data Layer</text>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__UI__Notifier__0" data-role="connector">
+      <path d="M 131.89 185.6 L 131.89 304.25" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__Notifier__Contract__0" data-role="connector">
+      <path d="M 166.84 393.2 L 166.84 596.75" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge m-edge--dotted" id="m5cbff3__edge__RepoImpl__Contract__0" data-role="connector">
+      <path d="M 554.68 168.7 L 554.68 269.5 Q 554.68 275.5, 548.68 275.5 L 374.67 275.5 Q 368.67 275.5, 368.67 281.5 L 368.67 619 Q 368.67 625, 362.67 625 L 302.78 625" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__RepoImpl__DataSource__0" data-role="connector">
+      <path d="M 598.3 168.7 L 598.3 321.15" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__DataSource__Models__0" data-role="connector">
+      <path d="M 574.68 376.3 L 574.68 579.85" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__Models__Entities__0" data-role="connector">
+      <path d="M 574.68 668.8 L 574.68 698.8 Q 574.68 704.8, 568.68 704.8 L 252.54 704.8 Q 246.54 704.8, 246.54 710.8 L 246.54 807.45" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__RepoImpl__Notifier__0" data-role="connector">
+      <path d="M 511.06 168.7 L 511.06 231.6 Q 511.06 237.6, 505.06 237.6 L 207.78 237.6 Q 201.78 237.6, 201.78 243.6 L 201.78 304.25" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-edge" id="m5cbff3__edge__Notifier__UI__0" data-role="connector">
+      <path d="M 50 349.4 L 36 349.4 Q 30 349.4, 30 343.4 L 30 116 Q 30 110, 36 110 L 82.61 110" class="m-path" marker-end="url(#m5cbff3__mk-arrow)"/>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__UI" data-role="vertex">
+      <rect x="83.96" y="98" width="165.75" height="87.6" class="m-shape"/>
+      <text x="166.84" y="141.8" class="m-label t-label" text-anchor="middle"><tspan x="166.84" dy="-25.35px">Screens &amp; Widgets</tspan><tspan x="166.84" dy="16.9px">- CourseListScreen</tspan><tspan x="166.84" dy="16.9px">- CourseDetailScreen</tspan><tspan x="166.84" dy="16.9px">- LessonPlayerScreen</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__RepoImpl" data-role="vertex">
+      <rect x="455.44" y="114.9" width="198.48" height="53.8" class="m-shape"/>
+      <text x="554.68" y="141.8" class="m-label t-label" text-anchor="middle"><tspan x="554.68" dy="-8.45px">Repository Implementation</tspan><tspan x="554.68" dy="16.9px">- MockCourseRepository</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__Notifier" data-role="vertex">
+      <rect x="50" y="305.6" width="233.67" height="87.6" class="m-shape"/>
+      <text x="166.84" y="349.4" class="m-label t-label" text-anchor="middle"><tspan x="166.84" dy="-25.35px">Riverpod Notifiers &amp; Providers</tspan><tspan x="166.84" dy="16.9px">- courseListControllerProvider</tspan><tspan x="166.84" dy="16.9px">- courseDetailProvider</tspan><tspan x="166.84" dy="16.9px">- lessonPlayerControllerProvider</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__DataSource" data-role="vertex">
+      <rect x="443.67" y="322.5" width="262.02" height="53.8" class="m-shape"/>
+      <text x="574.68" y="349.4" class="m-label t-label" text-anchor="middle"><tspan x="574.68" dy="-8.45px">Data Sources</tspan><tspan x="574.68" dy="16.9px">- LocalCourseDataSource / REST API</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__Contract" data-role="vertex">
+      <rect x="90" y="598.1" width="211.43" height="53.8" class="m-shape"/>
+      <text x="195.71" y="625" class="m-label t-label" text-anchor="middle"><tspan x="195.71" dy="-8.45px">Repository Contract</tspan><tspan x="195.71" dy="16.9px">- CourseRepository interface</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__Models" data-role="vertex">
+      <rect x="495.56" y="581.2" width="158.24" height="87.6" class="m-shape"/>
+      <text x="574.68" y="625" class="m-label t-label" text-anchor="middle"><tspan x="574.68" dy="-25.35px">Data Models &amp; DTOs</tspan><tspan x="574.68" dy="16.9px">- CourseModel</tspan><tspan x="574.68" dy="16.9px">- LessonModel</tspan><tspan x="574.68" dy="16.9px">- InstructorModel</tspan></text>
+    </g>
+    <g class="m-node m-node--rect" id="m5cbff3__node__Entities" data-role="vertex">
+      <rect x="191.66" y="808.8" width="109.77" height="87.6" class="m-shape"/>
+      <text x="246.54" y="852.6" class="m-label t-label" text-anchor="middle"><tspan x="246.54" dy="-25.35px">Pure Entities</tspan><tspan x="246.54" dy="16.9px">- Course</tspan><tspan x="246.54" dy="16.9px">- Lesson</tspan><tspan x="246.54" dy="16.9px">- Instructor</tspan></text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="44.9" y="197.3" width="173.99" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="131.89" y="208.45" class="m-label t-edge" text-anchor="middle">User Interactions / Watch State</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="148.19" y="484.5" width="37.3" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="166.84" y="495.65" class="m-label t-edge" text-anchor="middle">Calls</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="332.74" y="439.1" width="71.86" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="368.67" y="450.25" class="m-label t-edge" text-anchor="middle">Implements</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="572.26" y="234.45" width="52.1" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="598.3" y="245.6" class="m-label t-edge" text-anchor="middle">Queries</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="534.37" y="467.6" width="80.62" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="574.68" y="478.75" class="m-label t-edge" text-anchor="middle">Parses JSON</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="193.63" y="745.65" width="105.82" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="246.54" y="756.8" class="m-label t-edge" text-anchor="middle">Maps to / Extends</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="309.35" y="226.45" width="94.15" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="356.42" y="237.6" class="m-label t-edge" text-anchor="middle">Returns Entities</text>
+    </g>
+    <g class="m-edge-label">
+      <rect x="-9.08" y="249.13" width="102.17" height="22.3" rx="11.15" ry="11.15" class="m-pill-bg"/>
+      <text x="42" y="260.27" class="m-label t-edge" text-anchor="middle">AsyncValue State</text>
+    </g>
+  </g>
+</svg>
