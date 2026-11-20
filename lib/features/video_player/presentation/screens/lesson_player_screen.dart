@@ -135,7 +135,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
       }
     });
 
-    final bool isCompact = context.isCompact;
+    final bool useSplitView = context.useSplitView;
 
     return Scaffold(
       appBar: AppBar(
@@ -156,8 +156,8 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           },
         ),
         actions: [
-          // Show playlist action button (especially convenient on mobile)
-          if (lessonAsync.value?.course != null)
+          // Show playlist action button when sidebar playlist is not visible
+          if (lessonAsync.value?.course != null && !useSplitView)
             IconButton(
               icon: const Icon(Icons.playlist_play_rounded),
               tooltip: 'Daftar Materi',
@@ -203,35 +203,42 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             });
           }
 
-          if (isCompact) {
-            return _buildCompactLayout(lesson, playerState);
+          if (useSplitView) {
+            return _buildWideLayout(lesson, playerState);
           }
 
-          return _buildWideLayout(lesson, playerState);
+          return _buildCompactLayout(lesson, playerState);
         },
       ),
     );
   }
 
-  /// Single-column layout optimized for mobile screens (< 600 dp)
+  /// Single-column layout optimized for mobile screens and tablet portrait
   Widget _buildCompactLayout(Lesson lesson, LessonPlayerState playerState) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildVideoViewport(lesson),
-          Padding(
-            padding: AppSpacing.paddingCard,
-            child: _buildLessonDetails(lesson, playerState),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildVideoViewport(lesson),
+              Padding(
+                padding: AppSpacing.paddingCard,
+                child: _buildLessonDetails(lesson, playerState),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  /// Two-column layout for tablets and unfolded foldable screens (>= 600 dp)
+  /// Two-column layout for wide screens and tablet/foldable landscape
   Widget _buildWideLayout(Lesson lesson, LessonPlayerState playerState) {
-    return Center(
+    return Align(
+      alignment: Alignment.topCenter,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           maxWidth: AppBreakpoints.maxContentWidth,

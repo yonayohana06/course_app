@@ -48,6 +48,22 @@ extension ResponsiveContext on BuildContext {
   bool get isExpanded => screenWidth > AppBreakpoints.mediumMax;
   bool get isTabletOrFoldable => screenWidth >= AppBreakpoints.mediumMin;
 
+  /// Whether current orientation is landscape.
+  bool get isLandscape =>
+      MediaQuery.orientationOf(this) == Orientation.landscape;
+
+  /// Whether current orientation is portrait.
+  bool get isPortrait =>
+      MediaQuery.orientationOf(this) == Orientation.portrait;
+
+  /// Whether to use two-column split view.
+  /// On tablets/foldables in portrait (e.g. iPad 11" 820x1180), height dominates width,
+  /// so a centered single-column layout is cleaner than squeezing content horizontally.
+  /// Split view is enabled when in landscape orientation on tablet/foldable screens,
+  /// or on extra-wide screens (width >= 1000 dp).
+  bool get useSplitView =>
+      (isTabletOrFoldable && isLandscape) || screenWidth >= 1000.0;
+
   /// Returns responsive value according to current screen breakpoint.
   T responsiveValue<T>({
     required T compact,

@@ -43,79 +43,84 @@ class CourseDetailScreen extends ConsumerWidget {
           onRetry: () => ref.refresh(courseDetailProvider(courseId)),
         ),
         data: (course) {
-          final bool isCompact = context.isCompact;
-
-          if (isCompact) {
-            return _buildCompactLayout(context, course);
+          if (context.useSplitView) {
+            return _buildWideLayout(context, course);
           }
 
-          return _buildWideLayout(context, course);
+          return _buildCompactLayout(context, course);
         },
       ),
     );
   }
 
-  /// Single-column layout optimized for mobile smartphones (< 600 dp)
+  /// Single-column layout optimized for mobile smartphones and tablet portrait view
   Widget _buildCompactLayout(BuildContext context, Course course) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: CourseHeader(course: course),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.base,
-              AppSpacing.sm,
-              AppSpacing.base,
-              AppSpacing.md,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: CourseHeader(course: course),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
-                  child: Text(
-                    'Daftar Materi (Lessons)',
-                    style: AppTypography.heading3,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.base,
+                  AppSpacing.sm,
+                  AppSpacing.base,
+                  AppSpacing.md,
                 ),
-                AppSpacing.horizontalSm,
-                Text(
-                  '${course.lessons.length} materi',
-                  style: AppTypography.labelMedium.copyWith(
-                    color: AppColors.primary,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Daftar Materi (Lessons)',
+                        style: AppTypography.heading3,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    AppSpacing.horizontalSm,
+                    Text(
+                      '${course.lessons.length} materi',
+                      style: AppTypography.labelMedium.copyWith(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final lesson = course.lessons[index];
-              return LessonListTile(
-                lesson: lesson,
-                onTap: () {
-                  context.go('/courses/$courseId/lessons/${lesson.id}');
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final lesson = course.lessons[index];
+                  return LessonListTile(
+                    lesson: lesson,
+                    onTap: () {
+                      context.go('/courses/$courseId/lessons/${lesson.id}');
+                    },
+                  );
                 },
-              );
-            },
-            childCount: course.lessons.length,
-          ),
+                childCount: course.lessons.length,
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: AppSpacing.verticalXxl,
+            ),
+          ],
         ),
-        const SliverToBoxAdapter(
-          child: AppSpacing.verticalXxl,
-        ),
-      ],
+      ),
     );
   }
 
-  /// Two-column split layout for tablets and unfolded foldable devices (>= 600 dp)
+  /// Two-column split layout for wide screens and tablet/foldable landscape
   Widget _buildWideLayout(BuildContext context, Course course) {
-    return Center(
+    return Align(
+      alignment: Alignment.topCenter,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           maxWidth: AppBreakpoints.maxContentWidth,

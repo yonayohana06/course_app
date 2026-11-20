@@ -73,7 +73,16 @@ class CourseHeader extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    AppBadge.level(level: course.level),
+                    AppBadge(
+                      label: course.level,
+                      backgroundColor: Colors.black.withValues(alpha: 0.6),
+                      textColor: Colors.white,
+                      borderRadius: AppRadius.borderFull,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md,
+                        vertical: AppSpacing.xxs,
+                      ),
+                    ),
                   ],
                 ),
               ),

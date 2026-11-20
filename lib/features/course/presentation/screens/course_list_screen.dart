@@ -86,7 +86,8 @@ class _CourseListScreenState extends ConsumerState<CourseListScreen> {
             ...{for (final c in allCourses) c.category},
           ];
 
-          return Center(
+          return Align(
+            alignment: Alignment.topCenter,
             child: ConstrainedBox(
               constraints: const BoxConstraints(
                 maxWidth: AppBreakpoints.maxContentWidth,

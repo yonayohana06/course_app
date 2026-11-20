@@ -44,13 +44,16 @@ void main() {
       expect(capturedContext.isMedium, isFalse);
       expect(capturedContext.isExpanded, isFalse);
       expect(capturedContext.isTabletOrFoldable, isFalse);
+      expect(capturedContext.isPortrait, isTrue);
+      expect(capturedContext.isLandscape, isFalse);
+      expect(capturedContext.useSplitView, isFalse);
       expect(capturedContext.courseGridColumns, 1);
       expect(
         capturedContext.responsiveValue(compact: 'phone', medium: 'fold', expanded: 'tablet'),
         'phone',
       );
 
-      // 2. Test Medium screen (foldable unfolded)
+      // 2. Test Medium screen (foldable unfolded portrait)
       tester.view.physicalSize = const Size(700, 900);
       await tester.pumpWidget(
         MaterialApp(
@@ -67,13 +70,35 @@ void main() {
       expect(capturedContext.isMedium, isTrue);
       expect(capturedContext.isExpanded, isFalse);
       expect(capturedContext.isTabletOrFoldable, isTrue);
+      expect(capturedContext.isPortrait, isTrue);
+      expect(capturedContext.isLandscape, isFalse);
+      expect(capturedContext.useSplitView, isFalse);
       expect(capturedContext.courseGridColumns, 2);
       expect(
         capturedContext.responsiveValue(compact: 'phone', medium: 'fold', expanded: 'tablet'),
         'fold',
       );
 
-      // 3. Test Expanded screen (large tablet)
+      // 3. Test iPad Air 11-inch Portrait (820x1180)
+      tester.view.physicalSize = const Size(820, 1180);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (ctx) {
+              capturedContext = ctx;
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+
+      expect(capturedContext.isCompact, isFalse);
+      expect(capturedContext.isTabletOrFoldable, isTrue);
+      expect(capturedContext.isPortrait, isTrue);
+      expect(capturedContext.isLandscape, isFalse);
+      expect(capturedContext.useSplitView, isFalse);
+
+      // 4. Test Expanded screen (large tablet landscape 1024x768)
       tester.view.physicalSize = const Size(1024, 768);
       await tester.pumpWidget(
         MaterialApp(
@@ -90,6 +115,9 @@ void main() {
       expect(capturedContext.isMedium, isFalse);
       expect(capturedContext.isExpanded, isTrue);
       expect(capturedContext.isTabletOrFoldable, isTrue);
+      expect(capturedContext.isPortrait, isFalse);
+      expect(capturedContext.isLandscape, isTrue);
+      expect(capturedContext.useSplitView, isTrue);
       expect(capturedContext.courseGridColumns, 3);
       expect(
         capturedContext.responsiveValue(compact: 'phone', medium: 'fold', expanded: 'tablet'),

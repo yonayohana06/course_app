@@ -88,7 +88,7 @@ void main() {
       expect(find.text('Flutter Responsive Design'), findsOneWidget);
     });
 
-    testWidgets('CourseDetailScreen renders split view on tablet width',
+    testWidgets('CourseDetailScreen renders split view on tablet landscape (900x700)',
         (tester) async {
       tester.view.physicalSize = const Size(900, 700);
       tester.view.devicePixelRatio = 1.0;
@@ -102,6 +102,80 @@ void main() {
       expect(find.text('Flutter Responsive Design'), findsOneWidget);
       expect(find.text('Daftar Materi (Lessons)'), findsOneWidget);
       expect(find.text('Breakpoints & Layouts'), findsOneWidget);
+      // In split view, CustomScrollView is not used; Row with 2 SingleChildScrollViews is used
+      expect(find.byType(CustomScrollView), findsNothing);
+    });
+
+    testWidgets(
+        'iPad Air 11-inch Portrait (820x1180): CourseDetailScreen renders single column top-aligned',
+        (tester) async {
+      tester.view.physicalSize = const Size(820, 1180);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(createScope(const CourseDetailScreen(courseId: 'c1')));
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // In portrait, uses single-column CustomScrollView constrained to top
+      expect(find.byType(CustomScrollView), findsOneWidget);
+      expect(find.text('Flutter Responsive Design'), findsOneWidget);
+      expect(find.text('Daftar Materi (Lessons)'), findsOneWidget);
+    });
+
+    testWidgets(
+        'iPad Air 11-inch Landscape (1180x820): CourseDetailScreen renders split view',
+        (tester) async {
+      tester.view.physicalSize = const Size(1180, 820);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(createScope(const CourseDetailScreen(courseId: 'c1')));
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // In landscape, uses split view (no CustomScrollView)
+      expect(find.byType(CustomScrollView), findsNothing);
+      expect(find.text('Flutter Responsive Design'), findsOneWidget);
+      expect(find.text('Daftar Materi (Lessons)'), findsOneWidget);
+    });
+
+    testWidgets(
+        'iPad Air 11-inch Portrait (820x1180): LessonPlayerScreen uses compact layout without sidebar',
+        (tester) async {
+      tester.view.physicalSize = const Size(820, 1180);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(
+        createScope(const LessonPlayerScreen(courseId: 'c1', lessonId: 'l1')),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Sidebar playlist panel should NOT be visible in portrait
+      expect(find.byType(LessonPlaylistPanel), findsNothing);
+      // Playlist icon in AppBar should be visible
+      expect(find.byIcon(Icons.playlist_play_rounded), findsOneWidget);
+    });
+
+    testWidgets(
+        'iPad Air 11-inch Landscape (1180x820): LessonPlayerScreen embeds LessonPlaylistPanel',
+        (tester) async {
+      tester.view.physicalSize = const Size(1180, 820);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(
+        createScope(const LessonPlayerScreen(courseId: 'c1', lessonId: 'l1')),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Sidebar playlist panel should be visible in landscape
+      expect(find.byType(LessonPlaylistPanel), findsOneWidget);
+      // Playlist icon in AppBar is not needed when sidebar is present
+      expect(find.byIcon(Icons.playlist_play_rounded), findsNothing);
     });
 
     testWidgets('LessonPlayerScreen embeds LessonPlaylistPanel in sidebar on tablet width',
